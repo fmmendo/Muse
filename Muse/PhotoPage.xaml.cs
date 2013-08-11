@@ -20,27 +20,27 @@ namespace Muse
 			InitializeComponent();
 
 			// Set the data context of the page to the News List
-			DataContext = App.PhotoViewModel;
+			//DataContext = App.PhotoViewModel;
 		}
 
 		private void Back_Click(object sender, EventArgs e)
 		{
-			int page = App.PhotoViewModel._page;
-			page -= 1;
-			if (page < 0) page = App.ViewModel.Photos.Count - 1;
+            //int page = App.PhotoViewModel._page;
+            //page -= 1;
+            //if (page < 0) page = App.ViewModel.Photos.Count - 1;
 
-			App.PhotoViewModel._page = page;
-			App.PhotoViewModel.LoadPage(page);
+            //App.PhotoViewModel._page = page;
+            //App.PhotoViewModel.LoadPage(page);
 		}
 
 		private void Next_Click(object sender, EventArgs e)
 		{
-			int page = App.PhotoViewModel._page;
-			page += 1;
-			if (page >= App.ViewModel.Photos.Count) page = 0;
+            //int page = App.PhotoViewModel._page;
+            //page += 1;
+            //if (page >= App.ViewModel.Photos.Count) page = 0;
 
-			App.PhotoViewModel._page = page;
-			App.PhotoViewModel.LoadPage(page);
+            //App.PhotoViewModel._page = page;
+            //App.PhotoViewModel.LoadPage(page);
 		}
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)

@@ -14,41 +14,43 @@
     mc:Ignorable="d" d:DesignHeight="696" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True">
 
-	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto"/>
-			<RowDefinition Height="*"/>
-		</Grid.RowDefinitions>
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-		<!--TitlePanel contains the name of the application and page title-->
-		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="news" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-		</StackPanel>
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="news" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
 
-		<!--ContentPanel - place additional content here-->
-		<Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<ScrollViewer>
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <ScrollViewer>
                 <toolkit:GestureService.GestureListener>
                     <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
                 </toolkit:GestureService.GestureListener>
                 <StackPanel Orientation="Vertical">
-					<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
-				<TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-				<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
-				<Image Height="100" Width="100" Source="{Binding ImageURL}" Margin="12,0,9,0"/>
-			</StackPanel>
-			</ScrollViewer>
-		</Grid>
+                    <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+                    <TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                    <!--<phone:WebBrowser x:Name="NewsBrowser" Background="Black" IsScriptEnabled="True" Height="200"  Width="456" Foreground="White"/>-->
+                    <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
+                    <Image Height="100" Width="100" Source="{Binding ImageURL}" Margin="12,0,9,0"/>
 
-	</Grid>
-	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-				<shell:ApplicationBarIconButton IconUri="Img/appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
-				<shell:ApplicationBarIconButton IconUri="Img/appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
-		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+
+    </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="Img/appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Img/appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
 
 	

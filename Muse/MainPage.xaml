@@ -16,49 +16,18 @@
     SupportedOrientations="Portrait"  Orientation="Portrait"
     shell:SystemTray.IsVisible="False">
 
-	<!--LayoutRoot is the root grid where all page content is placed-->
-	<Grid x:Name="LayoutRoot" Background="Transparent">
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
 
-		<!--Panorama control-->
-		<controls:Panorama Title="muse" Foreground="White">
-			<controls:Panorama.Background>
-				<ImageBrush ImageSource="Img/Background.png"/>
-			</controls:Panorama.Background>
+        <!--Panorama control-->
+        <controls:Panorama Title="muse" Foreground="White">
+            <controls:Panorama.Background>
+                <ImageBrush ImageSource="Img/Background.png"/>
+            </controls:Panorama.Background>
 
-			<!-- NEWS -->
+            <!-- NEWS -->
             <controls:PanoramaItem Header="news" Foreground="White">
-				<ListBox Margin="0,0,-12,0" 
-						 ItemsSource="{Binding Items}">
-					
-					<toolkit:GestureService.GestureListener>
-						<toolkit:GestureListener Tap="GestureListener_Tap" />
-					</toolkit:GestureService.GestureListener>
-					
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal" 
-										Margin="0,0,0,17">
-								<Image Height="100" 
-									   Width="100" 
-									   Source="{Binding ImageURL}" 
-									   Margin="12,0,9,0"/>
-								<StackPanel Width="311">
-									<!-- News Title -->
-									<TextBlock Text="{Binding Title}" 
-											   TextWrapping="NoWrap" 
-											   Style="{StaticResource PhoneTextLargeStyle}"
-                                               Foreground="White"/>
-									<!-- News Publication Date -->
-									<TextBlock Text="{Binding PubDate}" 
-											   TextWrapping="Wrap" 
-											   Style="{StaticResource PhoneTextSubtleStyle}" 
-                                               Foreground="White"/>
-								</StackPanel>
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-                <!--<ListBox Margin="0,0,-12,0" 
+                <ListBox Margin="0,0,-12,0" 
 						 ItemsSource="{Binding Items}">
 
                     <toolkit:GestureService.GestureListener>
@@ -71,117 +40,125 @@
 										Margin="0,0,0,17">
                                 <Image Height="100" 
 									   Width="100" 
+                                       VerticalAlignment="Top"
 									   Source="{Binding ImageURL}" 
 									   Margin="12,0,9,0"/>
                                 <StackPanel Width="311">
+                                    <!-- News Title -->
                                     <TextBlock Text="{Binding Title}" 
-											   TextWrapping="NoWrap" 
-											   Style="{StaticResource PhoneTextLargeStyle}"
+											   TextWrapping="Wrap" 
+											   Style="{StaticResource PhoneTextTitle3Style}"
+                                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
+                                               MaxHeight="80"
                                                Foreground="White"/>
-                                    <TextBlock Text="{Binding PubDate}" 
+                                    <!-- News Publication Date -->
+                                    <TextBlock Text="{Binding Description}" 
 											   TextWrapping="Wrap" 
 											   Style="{StaticResource PhoneTextSubtleStyle}" 
-                                               Foreground="White"/>
+                                               FontSize="{StaticResource PhoneFontSizeSmall}"
+                                               Foreground="#FF999999"/>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
-                </ListBox>-->
+                </ListBox>
+
             </controls:PanoramaItem>
 
-			<!-- TOUR -->
+            <!-- TOUR -->
             <controls:PanoramaItem Header="tour" Foreground="White">
-				<ListBox Margin="0,0,-12,0" 
+                <ListBox Margin="0,0,-12,0" 
 						 ItemsSource="{Binding TourDates}">
-					
-					<toolkit:GestureService.GestureListener>
-						<toolkit:GestureListener Tap="GestureListener_Tap_tour"></toolkit:GestureListener>
-					</toolkit:GestureService.GestureListener>
-					
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal" 
+
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener Tap="GestureListener_Tap_tour"></toolkit:GestureListener>
+                    </toolkit:GestureService.GestureListener>
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" 
 										Margin="0,0,0,17">
-								<Grid>
-									<!-- Draw a calendar-like icon with tour date -->
-									<StackPanel Orientation="Vertical">
-										<Rectangle Height="70" 
+                                <Grid VerticalAlignment="Top">
+                                    <!-- Draw a calendar-like icon with tour date -->
+                                    <StackPanel Orientation="Vertical">
+                                        <Rectangle Height="70" 
 												   Width="100" 
 												   Fill="GhostWhite"></Rectangle>
-										<Rectangle Height="30" 
+                                        <Rectangle Height="30" 
 												   Width="100" 
 												   Fill="DodgerBlue"></Rectangle>
-									</StackPanel>
+                                    </StackPanel>
 
-									<!-- Place date on the calendar-like icon -->
-									<StackPanel Orientation="Vertical">
-										<TextBlock Text="{Binding Day}" 
+                                    <!-- Place date on the calendar-like icon -->
+                                    <StackPanel Orientation="Vertical">
+                                        <TextBlock Text="{Binding Day}" 
 												   Foreground="Black" 
 												   Height="70" 
 												   Width="100" 
 												   TextAlignment="Center" 
 												   FontSize="50" 
 												   FontWeight="Black"></TextBlock>
-										<TextBlock Text="{Binding MonthYear}" 
+                                        <TextBlock Text="{Binding MonthYear}" 
 												   Foreground="Black" 
 												   Height="30" 
 												   Width="100" 
 												   TextAlignment="Center" 
 												   FontWeight="Black"></TextBlock>
-									</StackPanel>
-								</Grid>
-								<StackPanel Width="311" Orientation="Vertical" Margin="0,0,0,17">
-									<!-- Gig title -->
-									<TextBlock Text="{Binding Title}" 
-											   TextWrapping="NoWrap" 
-											   Style="{StaticResource PhoneTextLargeStyle}" 
+                                    </StackPanel>
+                                </Grid>
+                                <StackPanel Width="311" Orientation="Vertical" Margin="0,0,0,17">
+                                    <!-- Gig title -->
+                                    <TextBlock Text="{Binding Title}" 
+											   TextWrapping="Wrap" 
+                                               Style="{StaticResource PhoneTextTitle3Style}"
+                                               FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                                                Foreground="White"/>
-									<!-- Publication date -->
-									<TextBlock Text="{Binding PubDate}" 
+                                    <!-- Publication date -->
+                                    <!--<TextBlock Text="{Binding Description}" 
 											   TextWrapping="Wrap" 
 											   Margin="12,-6,12,0" 
 											   Style="{StaticResource PhoneTextSubtleStyle}" 
-                                               Foreground="White"/>
-								</StackPanel>
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
-			</controls:PanoramaItem>
-            
+                                               FontSize="{StaticResource PhoneFontSizeSmall}"/>-->
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </controls:PanoramaItem>
+
             <!-- GALLERY -->
             <controls:PanoramaItem Header="photos" Foreground="White">
-				<ListBox Margin="0,0,0,0" 
+                <ListBox Margin="0,0,0,0" 
 						 ItemsSource="{Binding Photos}">
-					
-					<toolkit:GestureService.GestureListener>
-						<toolkit:GestureListener Tap="GestureListener_Tap_photo"></toolkit:GestureListener>
-					</toolkit:GestureService.GestureListener>
 
-					<ListBox.ItemsPanel>
-						<ItemsPanelTemplate>
-							<toolkit:WrapPanel Orientation="Horizontal" 
+                    <toolkit:GestureService.GestureListener>
+                        <toolkit:GestureListener Tap="GestureListener_Tap_photo"></toolkit:GestureListener>
+                    </toolkit:GestureService.GestureListener>
+
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <toolkit:WrapPanel Orientation="Horizontal" 
 											   Margin="0,0,0,17"
 											   ItemHeight="140" ItemWidth="140" Width="450">
 
-							</toolkit:WrapPanel>
-						</ItemsPanelTemplate>
-					</ListBox.ItemsPanel>
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<Border BorderThickness="5"
+                            </toolkit:WrapPanel>
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderThickness="5"
 								    BorderBrush="Black">
-							<Image Height="120" 
+                                <Image Height="120" 
 								   Width="120" 
 								   Source="{Binding ImageThumb}" 
 								   Margin="0"/>
-							</Border>
-						</DataTemplate>
-							
-					</ListBox.ItemTemplate>
-					
-				</ListBox>
-			</controls:PanoramaItem>
-		</controls:Panorama>
-	</Grid>
+                            </Border>
+                        </DataTemplate>
+
+                    </ListBox.ItemTemplate>
+
+                </ListBox>
+            </controls:PanoramaItem>
+        </controls:Panorama>
+    </Grid>
 </phone:PhoneApplicationPage>

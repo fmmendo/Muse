@@ -34,56 +34,56 @@ namespace Muse
 			}
 		}
 
-		private static NewsViewModel newsViewModel = null;
-		/// <summary>
-		/// A static NewsViewModel used by the views to bind against.
-		/// </summary>
-		/// <returns>The MainViewModel object.</returns>
-		public static NewsViewModel NewsViewModel
-		{
-			get
-			{
-				// Delay creation of the view model until necessary
-				if (newsViewModel == null)
-					newsViewModel = new NewsViewModel("test","","","");
+        //private static NewsViewModel newsViewModel = null;
+        ///// <summary>
+        ///// A static NewsViewModel used by the views to bind against.
+        ///// </summary>
+        ///// <returns>The MainViewModel object.</returns>
+        //public static NewsViewModel NewsViewModel
+        //{
+        //    get
+        //    {
+        //        // Delay creation of the view model until necessary
+        //        if (newsViewModel == null)
+        //            newsViewModel = new NewsViewModel("test","","","");
 
-				return newsViewModel;
-			}
-		}
+        //        return newsViewModel;
+        //    }
+        //}
 
-		private static TourViewModel tourViewModel = null;
-		/// <summary>
-		/// A static NewsViewModel used by the views to bind against.
-		/// </summary>
-		/// <returns>The MainViewModel object.</returns>
-		public static TourViewModel TourViewModel
-		{
-			get
-			{
-				// Delay creation of the view model until necessary
-				if (tourViewModel == null)
-					tourViewModel = new TourViewModel("test","","","");
+        //private static TourViewModel tourViewModel = null;
+        ///// <summary>
+        ///// A static NewsViewModel used by the views to bind against.
+        ///// </summary>
+        ///// <returns>The MainViewModel object.</returns>
+        //public static TourViewModel TourViewModel
+        //{
+        //    get
+        //    {
+        //        // Delay creation of the view model until necessary
+        //        if (tourViewModel == null)
+        //            tourViewModel = new TourViewModel("test","","","");
 
-				return tourViewModel;
-			}
-		}
+        //        return tourViewModel;
+        //    }
+        //}
 
-		private static PhotoViewModel photoViewModel = null;
-		/// <summary>
-		/// A static NewsViewModel used by the views to bind against.
-		/// </summary>
-		/// <returns>The MainViewModel object.</returns>
-		public static PhotoViewModel PhotoViewModel
-		{
-			get
-			{
-				// Delay creation of the view model until necessary
-				if (photoViewModel == null)
-					photoViewModel = new PhotoViewModel("test","","","");
+        //private static PhotoViewModel photoViewModel = null;
+        ///// <summary>
+        ///// A static NewsViewModel used by the views to bind against.
+        ///// </summary>
+        ///// <returns>The MainViewModel object.</returns>
+        //public static PhotoViewModel PhotoViewModel
+        //{
+        //    get
+        //    {
+        //        // Delay creation of the view model until necessary
+        //        if (photoViewModel == null)
+        //            photoViewModel = new PhotoViewModel("test","","","");
 
-				return photoViewModel;
-			}
-		}
+        //        return photoViewModel;
+        //    }
+        //}
 		
 		/// <summary>
 		/// Provides easy access to the root frame of the Phone Application.
@@ -139,10 +139,10 @@ namespace Muse
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 			// Ensure that application state is restored appropriately
-			if (!App.ViewModel.IsDataLoaded)
-			{
-				//App.ViewModel.LoadData();
-			}
+            if (!App.ViewModel.Muse.IsDataLoaded)
+            {
+                App.ViewModel.Muse.LoadData();
+            }
 		}
 
 		/// <summary>

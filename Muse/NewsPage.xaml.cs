@@ -19,28 +19,41 @@ namespace Muse
 		{
 			InitializeComponent();
 
+           // NewsBrowser.NavigateToString(App.NewsViewModel.Description);
 			// Set the data context of the page to the News List
-			DataContext = App.NewsViewModel;
-		}
+			//DataContext = App.NewsViewModel;
+
+
+        }
+
+        private void WebBrowser_OnLoaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
 
 		private void Back_Click(object sender, EventArgs e)
 		{
-			int page = App.NewsViewModel._page;
-			page -= 1;
-			if (page < 0) page = App.ViewModel.Items.Count - 1;
+            //int page = App.NewsViewModel._page;
+            //page -= 1;
+            //if (page < 0) page = App.ViewModel.Items.Count - 1;
 
-			App.NewsViewModel._page = page;
-			App.NewsViewModel.LoadPage(page);
+            //App.NewsViewModel._page = page;
+            //App.NewsViewModel.LoadPage(page);
+
+           // NewsBrowser.NavigateToString(App.NewsViewModel.Description);
 		}
 
 		private void Next_Click(object sender, EventArgs e)
 		{
-			int page = App.NewsViewModel._page;
-			page += 1;
-			if (page >= App.ViewModel.Items.Count) page = 0;
+            //int page = App.NewsViewModel._page;
+            //page += 1;
+            //if (page >= App.ViewModel.Items.Count) page = 0;
 
-			App.NewsViewModel._page = page;
-			App.NewsViewModel.LoadPage(page);
+            //App.NewsViewModel._page = page;
+            //App.NewsViewModel.LoadPage(page);
+
+          //  NewsBrowser.NavigateToString(App.NewsViewModel.Description);
 		}
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
