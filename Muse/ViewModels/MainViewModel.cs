@@ -17,23 +17,21 @@ namespace Muse
     {
         #region Fields
 
-        private MuseService _muse = new Data.MuseService();
-        public MuseService Muse { get { return _muse; } }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<MuseRSSItem> Items { get { return Muse.Items; } }
+        public ObservableCollection<MuseRSSItem> Items { get { return Muse.App.MuseService.Items; } }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<MuseRSSItem> TourDates { get { return Muse.TourDates; } }
+        public ObservableCollection<MuseRSSItem> TourDates { get { return Muse.App.MuseService.TourDates; } }
 
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
-        public ObservableCollection<MuseRSSItem> Photos { get { return Muse.Photos; } }
+        public ObservableCollection<MuseRSSItem> Photos { get { return Muse.App.MuseService.Photos; } }
 
         #endregion
 
@@ -42,7 +40,8 @@ namespace Muse
         /// </summary>
         public MainViewModel()
         {
-            if (!Muse.LoadData())
+
+            if (!Muse.App.MuseService.LoadData())
             {
                 MessageBox.Show("No internet connection is available. Try again later.");
             }

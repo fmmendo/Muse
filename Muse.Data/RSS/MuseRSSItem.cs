@@ -150,8 +150,16 @@ namespace Muse.Data.RSS
             Link = link;
             Description = description;
             PubDate = pubdate;
-
+            GetTourDate();
             /* Prepare some muse specific data */
+            LoadHeavyDutyData();
+        }
+
+        /// <summary>
+        /// Does the rest of the necessary loading, pulling images, scraping pages, etc..
+        /// </summary>
+        internal void LoadHeavyDutyData()
+        {
             var bw = new BackgroundWorker();
             bw.DoWork += bw_DoWork;
             bw.RunWorkerAsync();
@@ -174,7 +182,6 @@ namespace Muse.Data.RSS
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            GetTourDate();
             GetDescription();
             GetImageAndNewsBody();
         }
@@ -184,11 +191,23 @@ namespace Muse.Data.RSS
         /// </summary>
         private void GetTourDate()
         {
-            DateTime date;
-            if (Title.Length > 10 && DateTime.TryParse(Title.Substring(0, 10), out date))
+            //DateTime date;
+            //if (Title.Length > 10 && DateTime.TryParse(Title.Substring(0, 10), out date))
+            //{
+            //    TourDate = date;
+            //    Title = Title.Remove(0, 13);
+            //}
+
+            int start = -1;
+            int end = -1;
+
+            start = Description.IndexOf("<b>On:</b>");
+            end = Description.IndexOf("<br />");
+
+            if (start >= 0 && end > 0 && end > start)
             {
-                TourDate = date;
-                Title = Title.Remove(0, 13);
+                string strDate = Description.Substring(start + 10, end - (start + 10)).Trim();
+                TourDate = DateTime.Parse(strDate);
             }
         }
         private void GetDescription()
@@ -196,23 +215,23 @@ namespace Muse.Data.RSS
             var desc = Description;
 
             //if (String.IsNullOrEmpty(MonthYear))
-            {
-                int start = -1;
-                int end = -1;
+            //{
+            //    int start = -1;
+            //    int end = -1;
 
-                start = desc.IndexOf("<b>On:</b>");
-                end = desc.IndexOf("<br />");
+            //    start = desc.IndexOf("<b>On:</b>");
+            //    end = desc.IndexOf("<br />");
 
-                if (start >= 0 && end > 0 && end > start)
-                {
-                    string date = desc.Substring(start + 10, end - (start + 10)).Trim();
-                    string[] split = date.Split(new char[] { ' ' });
-                    System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                    {
-                        TourDate = DateTime.Parse(String.Format("{0} {1} {2}", split[0], split[1], split[2]));
-                    });
-                }
-            }
+            //    if (start >= 0 && end > 0 && end > start)
+            //    {
+            //        string date = desc.Substring(start + 10, end - (start + 10)).Trim();
+            //        string[] split = date.Split(new char[] { ' ' });
+            //        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+            //        {
+            //            TourDate = DateTime.Parse(String.Format("{0} {1} {2}", split[0], split[1], split[2]));
+            //        });
+            //    }
+            //}
 
             // remove the ImageURL from the description
             if (String.IsNullOrEmpty(ImageURL))
@@ -235,7 +254,7 @@ namespace Muse.Data.RSS
                             {
                                 ImageThumb = desc.Substring(startImage, endImage - startImage);
                                 ImageURL = ImageThumb.Replace("thumb", "original");
-                            desc = desc.Substring(endtag + 1);
+                                desc = desc.Substring(endtag + 1);
                             });
                         }
                     }
@@ -305,7 +324,7 @@ namespace Muse.Data.RSS
                 wc.DownloadStringAsync(new Uri(Link));
             }
         }
-        
+
         void wc_DownloadStringCompleted(object sender, System.Net.DownloadStringCompletedEventArgs e)
         {
             //If an error occured during download exit 
@@ -348,6 +367,21 @@ namespace Muse.Data.RSS
                 index = end = start = -1;
             }
             html = null;
+        }
+
+        public void NotifyAll()
+        {
+            NotifyPropertyChanged("TourDate");
+            NotifyPropertyChanged("Day");
+            NotifyPropertyChanged("MonthYear");
+            NotifyPropertyChanged("ImageThumb");
+            NotifyPropertyChanged("ImageURL");
+            NotifyPropertyChanged("NewsBody");
+            NotifyPropertyChanged("ItemID");
+            NotifyPropertyChanged("Title");
+            NotifyPropertyChanged("Description");
+            NotifyPropertyChanged("Link");
+            NotifyPropertyChanged("PubDate");
         }
     }
 }

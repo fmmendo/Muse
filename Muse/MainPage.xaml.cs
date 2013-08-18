@@ -34,10 +34,7 @@ namespace Muse
 		/// <param name="e"></param>
 		private void MainPage_Loaded(object sender, RoutedEventArgs e)
 		{
-            //if (!App.ViewModel.IsDataLoaded)
-            //{
-            //    App.ViewModel.LoadData();
-            //}
+
 		}
 
 		#region Gesture Handlers
@@ -52,7 +49,8 @@ namespace Muse
 			if (lb == null) return;
 			if (lb.Items.Count <= 0) return;
 
-			//App.NewsViewModel.LoadPage(lb.SelectedIndex);
+            App.MuseService.CurrentItemIndex = lb.SelectedIndex;
+            App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
 			NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
 		}
 
@@ -67,7 +65,8 @@ namespace Muse
 			if (lb == null) return;
 			if (lb.Items.Count <= 0) return;
 
-			//App.TourViewModel.LoadPage(lb.SelectedIndex);
+            App.MuseService.CurrentItemIndex = lb.SelectedIndex;
+            App.MuseService.LoadItem(Data.MuseService.MuseDataType.Tour);
 			NavigationService.Navigate(new Uri("/TourPage.xaml", UriKind.Relative));
 		}
 
@@ -82,7 +81,8 @@ namespace Muse
 			if (lb == null) return;
 			if (lb.Items.Count <= 0) return;
 
-			//App.PhotoViewModel.LoadPage(lb.SelectedIndex);
+            App.MuseService.CurrentItemIndex = lb.SelectedIndex;
+            App.MuseService.LoadItem(Data.MuseService.MuseDataType.Photo);
 			NavigationService.Navigate(new Uri("/PhotoPage.xaml", UriKind.Relative));
 
 		}

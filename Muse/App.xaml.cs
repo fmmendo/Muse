@@ -17,6 +17,16 @@ namespace Muse
 {
 	public partial class App : Application
 	{
+        private static Muse.Data.MuseService _museService = new Data.MuseService();
+        public static Muse.Data.MuseService MuseService
+        {
+            get 
+            {
+                if (_museService == null) _museService = new Data.MuseService();
+                return _museService;
+            }
+        }
+
 		private static MainViewModel viewModel = null;
 		/// <summary>
 		/// A static MainViewModel used by the views to bind against.
@@ -139,9 +149,16 @@ namespace Muse
 		private void Application_Activated(object sender, ActivatedEventArgs e)
 		{
 			// Ensure that application state is restored appropriately
-            if (!App.ViewModel.Muse.IsDataLoaded)
+            if (!App.MuseService.IsDataLoaded)
             {
-                App.ViewModel.Muse.LoadData();
+                if (!Microsoft.Phone.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+                {
+                    MessageBox.Show("No internet connection is available. Try again later.");
+                }
+                else
+                {
+                    App.MuseService.LoadData();
+                }
             }
 		}
 

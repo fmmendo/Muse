@@ -20,7 +20,8 @@ namespace Muse
 			InitializeComponent();
 
 			// Set the data context of the page to the News List
-			//DataContext = App.PhotoViewModel;
+            //DataContext = App.PhotoViewModel;
+            DataContext = App.MuseService.CurrentItem;
 		}
 
 		private void Back_Click(object sender, EventArgs e)

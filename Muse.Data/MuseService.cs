@@ -18,7 +18,7 @@ namespace Muse.Data
         private const string GALLERYRSS = "http://muse.mu/rss/photos/";
 
         public bool IsDataLoaded { get; private set; }
-        
+
         /// <summary>
         /// A collection for ItemViewModel objects.
         /// </summary>
@@ -34,9 +34,15 @@ namespace Muse.Data
         /// </summary>
         public ObservableCollection<MuseRSSItem> Photos { get; private set; }
 
+        public MuseRSSItem CurrentItem { get; private set; }
+        public int CurrentItemIndex { get; set; }
+        /// <summary>
+        /// 
+        /// </summary>
         public MuseService()
         {
             IsDataLoaded = false;
+            CurrentItemIndex = -1;
 
             Items = new ObservableCollection<MuseRSSItem>();
             Photos = new ObservableCollection<MuseRSSItem>();
@@ -54,14 +60,42 @@ namespace Muse.Data
 
             WebClient wc_tour = new WebClient();
             wc_tour.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted_tour);
-            wc_tour.DownloadStringAsync(new Uri(TOURRSS)); 
-            
+            wc_tour.DownloadStringAsync(new Uri(TOURRSS));
+
             WebClient wc_photos = new WebClient();
             wc_photos.DownloadStringCompleted += new DownloadStringCompletedEventHandler(wc_DownloadStringCompleted_photos);
             wc_photos.DownloadStringAsync(new Uri(GALLERYRSS));
 
             IsDataLoaded = true;
             return IsDataLoaded;
+        }
+
+        public void LoadItem(MuseDataType type)
+        {
+            switch (type)
+            {
+                case MuseDataType.News:
+                    if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
+                        CurrentItem = Items[CurrentItemIndex];
+                    break;
+                case MuseDataType.Tour:
+                    if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
+                        CurrentItem = TourDates[CurrentItemIndex];
+                    break;
+                case MuseDataType.Photo:
+                    if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
+                        CurrentItem = Photos[CurrentItemIndex];
+                    break;
+            }
+            NotifyPropertyChanged("CurrentItem");
+            CurrentItem.NotifyAll();
+        }
+
+        public enum MuseDataType
+        {
+            News,
+            Tour,
+            Photo
         }
 
         /// <summary>
@@ -114,22 +148,20 @@ namespace Muse.Data
                 if (!TourDates.Contains(rssItem))
                 {
                     //DateTime dt = DateTime.Parse(rssItem.Day + " " + rssItem.MonthYear);
-                    //if (DateTime.Compare(DateTime.Today, dt) > 0)
-                    //{
-                    //    continue;
-                    //}
-                    //int index = -1;
-                    //foreach (var tourDate in TourDates)
-                    //{
-                    //    DateTime dt2 = DateTime.Parse(tourDate.Day + " " + tourDate.MonthYear);
-                    //    if (DateTime.Compare(dt, dt2) > 0)
-                    //    {
-                    //        index = TourDates.IndexOf(tourDate);
-                    //        continue;
-                    //    }
-                    //}
-                    TourDates.Add(rssItem);
-                    //TourDates.Insert(index + 1, rssItem);
+                    if (DateTime.Compare(DateTime.Today, rssItem.TourDate) > 0)
+                    {
+                        continue;
+                    }
+                    int index = -1;
+                    foreach (var tourDate in TourDates)
+                    {
+                        if (DateTime.Compare(rssItem.TourDate, tourDate.TourDate) > 0)
+                        {
+                            index = TourDates.IndexOf(tourDate);
+                            continue;
+                        }
+                    }
+                    TourDates.Insert(index + 1, rssItem);
                 }
             }
 
