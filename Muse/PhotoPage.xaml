@@ -29,17 +29,26 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<ScrollViewer>
+			<!--<ScrollViewer>-->
                 <toolkit:GestureService.GestureListener>
                     <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
                 </toolkit:GestureService.GestureListener>
-                <StackPanel Orientation="Vertical">
+                <!--<StackPanel Orientation="Vertical">
 					<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
 					<TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-					<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
-					<Image Width="450" Source="{Binding ImageURL}" Margin="5,0,5,0"/>
-				</StackPanel>
-			</ScrollViewer>
+					<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>-->
+                    <Image Width="450" x:Name="photo" 
+                           Source="{Binding ImageURL}" 
+                           Margin="5,0,5,0">
+                        <Image.RenderTransform>
+                            <CompositeTransform x:Name="ImageTransform" ScaleX="1" ScaleY="1"></CompositeTransform>
+                        </Image.RenderTransform>
+                        <toolkit:GestureService.GestureListener>
+                            <toolkit:GestureListener PinchStarted="GestureListener_PinchStarted" PinchDelta="GestureListener_PinchDelta" DragDelta="GestureListener_DragDelta" Tap="GestureListener_Tap"></toolkit:GestureListener>
+                        </toolkit:GestureService.GestureListener>
+                    </Image>
+                <!--</StackPanel>
+			</ScrollViewer>-->
 		</Grid>
     </Grid>
 

@@ -19,11 +19,7 @@ namespace Muse
 		{
 			InitializeComponent();
 
-           // NewsBrowser.NavigateToString(App.NewsViewModel.Description);
-			// Set the data context of the page to the News List
 			DataContext = App.MuseService.CurrentItem;
-
-
         }
 
         private void WebBrowser_OnLoaded(object sender, RoutedEventArgs e)
@@ -37,14 +33,6 @@ namespace Muse
             App.MuseService.CurrentItemIndex -= 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
             DataContext = App.MuseService.CurrentItem;
-            //int page = App.NewsViewModel._page;
-            //page -= 1;
-            //if (page < 0) page = App.ViewModel.Items.Count - 1;
-
-            //App.NewsViewModel._page = page;
-            //App.NewsViewModel.LoadPage(page);
-
-           // NewsBrowser.NavigateToString(App.NewsViewModel.Description);
 		}
 
 		private void Next_Click(object sender, EventArgs e)
@@ -52,14 +40,6 @@ namespace Muse
             App.MuseService.CurrentItemIndex += 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
             DataContext = App.MuseService.CurrentItem;
-            //int page = App.NewsViewModel._page;
-            //page += 1;
-            //if (page >= App.ViewModel.Items.Count) page = 0;
-
-            //App.NewsViewModel._page = page;
-            //App.NewsViewModel.LoadPage(page);
-
-          //  NewsBrowser.NavigateToString(App.NewsViewModel.Description);
 		}
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)

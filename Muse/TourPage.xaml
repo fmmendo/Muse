@@ -34,7 +34,7 @@
                     <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
                 </toolkit:GestureService.GestureListener>
                 <StackPanel Orientation="Vertical">
-					<TextBlock Text="{Binding TourDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+					<TextBlock Text="{Binding TourDateString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
 					<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
 					<TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
 					<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>

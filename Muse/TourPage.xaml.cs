@@ -19,29 +19,21 @@ namespace Muse
 		{
 			InitializeComponent();
 			
-			// Set the data context of the page to the News List
-            //DataContext = App.TourViewModel;
             DataContext = App.MuseService.CurrentItem;
 		}
 
 		private void Back_Click(object sender, EventArgs e)
 		{
-            //int page = App.TourViewModel._page;
-            //page -= 1;
-            //if (page < 0) page = App.ViewModel.TourDates.Count - 1;
-
-            //App.TourViewModel._page = page;
-            //App.TourViewModel.LoadPage(page);
+            App.MuseService.CurrentItemIndex -= 1;
+            App.MuseService.LoadItem(Data.MuseService.MuseDataType.Tour);
+            DataContext = App.MuseService.CurrentItem;
 		}
 
 		private void Next_Click(object sender, EventArgs e)
-		{
-            //int page = App.TourViewModel._page;
-            //page += 1;
-            //if (page >= App.ViewModel.TourDates.Count) page = 0;
-
-            //App.TourViewModel._page = page;
-            //App.TourViewModel.LoadPage(page);
+        {
+            App.MuseService.CurrentItemIndex += 1;
+            App.MuseService.LoadItem(Data.MuseService.MuseDataType.Tour);
+            DataContext = App.MuseService.CurrentItem;
 		}
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)

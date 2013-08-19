@@ -131,6 +131,10 @@ namespace Muse.Data.RSS
                 }
             }
         }
+        public string TourDateString
+        {
+            get { return _tourDate.ToString("dd MMM yyyy"); }
+        }
         #endregion
 
         /// <summary>
