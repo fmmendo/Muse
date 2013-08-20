@@ -23,8 +23,10 @@
 
 		<!--TitlePanel contains the name of the application and page title-->
 		<StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-			<TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
-			<TextBlock x:Name="PageTitle" Text="tour dates" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+			<!--<TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
+			<TextBlock x:Name="PageTitle" Text="tour dates" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
+            <TextBlock x:Name="ApplicationTitle" Text="tour dates" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding TourDateString}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
 		</StackPanel>
 
 		<!--ContentPanel - place additional content here-->
@@ -34,7 +36,7 @@
                     <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
                 </toolkit:GestureService.GestureListener>
                 <StackPanel Orientation="Vertical">
-					<TextBlock Text="{Binding TourDateString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
+					<!--<TextBlock Text="{Binding TourDateString}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>-->
 					<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
 					<TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
 					<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>

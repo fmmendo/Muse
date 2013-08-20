@@ -28,35 +28,57 @@
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<!--<ScrollViewer>-->
-                <toolkit:GestureService.GestureListener>
-                    <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
-                </toolkit:GestureService.GestureListener>
-                <!--<StackPanel Orientation="Vertical">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="0,0,0,0">
+            <!--<ScrollViewer>-->
+            <!--<toolkit:GestureService.GestureListener>
+                <toolkit:GestureListener Flick="GestureListener_Flick" DragDelta="GestureListener_DragDelta" DragCompleted="GestureListener_DragCompleted" />
+            </toolkit:GestureService.GestureListener>-->
+            <!--<StackPanel Orientation="Vertical">
 					<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>
 					<TextBlock Text="{Binding PubDate}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
 					<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>-->
-                    <Image Width="450" x:Name="photo" 
+            <Image Width="450" x:Name="photo" 
                            Source="{Binding ImageURL}" 
-                           Margin="5,0,5,0">
-                        <Image.RenderTransform>
-                            <CompositeTransform x:Name="ImageTransform" ScaleX="1" ScaleY="1"></CompositeTransform>
-                        </Image.RenderTransform>
-                        <toolkit:GestureService.GestureListener>
-                            <toolkit:GestureListener PinchStarted="GestureListener_PinchStarted" PinchDelta="GestureListener_PinchDelta" DragDelta="GestureListener_DragDelta" Tap="GestureListener_Tap"></toolkit:GestureListener>
-                        </toolkit:GestureService.GestureListener>
-                    </Image>
-                <!--</StackPanel>
+                           Margin="0,0,0,0"
+                           CacheMode="BitmapCache"
+                           ManipulationDelta="photo_ManipulationDelta"
+                           ManipulationCompleted="photo_ManipulationCompleted"
+                           ManipulationStarted="photo_ManipulationStarted" >
+                <Image.RenderTransform>
+                    <TransformGroup>
+                    <!--<CompositeTransform x:Name="ImageTransform" ScaleX="1" ScaleY="1"></CompositeTransform>-->
+                    <TranslateTransform x:Name="PanTransform"></TranslateTransform>
+                    <ScaleTransform x:Name="ScaleTransform"></ScaleTransform>
+                    </TransformGroup>
+                </Image.RenderTransform>
+                <Image.Resources>
+                    <Storyboard x:Name="Pan">
+                        <DoubleAnimation x:Name="PanAnimationX" Storyboard.TargetName="PanTransform" Storyboard.TargetProperty="X" Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                        <DoubleAnimation x:Name="PanAnimationY" Storyboard.TargetName="PanTransform" Storyboard.TargetProperty="Y" Duration="0:0:1">
+                            <DoubleAnimation.EasingFunction>
+                                <CircleEase EasingMode="EaseOut" />
+                            </DoubleAnimation.EasingFunction>
+                        </DoubleAnimation>
+                    </Storyboard>
+                </Image.Resources>
+                <!--<toolkit:GestureService.GestureListener>
+                    <toolkit:GestureListener PinchStarted="GestureListener_PinchStarted" PinchDelta="GestureListener_PinchDelta" DragDelta="GestureListener_DragDelta" Tap="GestureListener_Tap"></toolkit:GestureListener>
+                </toolkit:GestureService.GestureListener>-->
+            </Image>
+            <!--</StackPanel>
 			</ScrollViewer>-->
-		</Grid>
+        </Grid>
     </Grid>
 
-	<phone:PhoneApplicationPage.ApplicationBar>
-		<shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-			<shell:ApplicationBarIconButton IconUri="Img/appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
-			<shell:ApplicationBarIconButton IconUri="Img/appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
-		</shell:ApplicationBar>
-	</phone:PhoneApplicationPage.ApplicationBar>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="Img/appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Img/appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
