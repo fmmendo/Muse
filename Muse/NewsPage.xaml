@@ -26,7 +26,7 @@
             <!--<TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="news" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
             <TextBlock x:Name="ApplicationTitle" Text="news" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding Title, Mode=TwoWay}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Title, Mode=TwoWay}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -38,7 +38,7 @@
                 <StackPanel Orientation="Vertical">
                     <!--<TextBlock Text="{Binding Title, Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextLargeStyle}"/>-->
                     <TextBlock Text="{Binding PubDate, Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    <!--<phone:WebBrowser x:Name="NewsBrowser" Background="Black" IsScriptEnabled="True" Height="200"  Width="456" Foreground="White"/>-->
+                    <!--<phone:WebBrowser x:Name="NewsBrowser" Background="Black" IsScriptEnabled="True" Height="200"  Width="456" Foreground="White"/>-->                    
                     <TextBlock Text="{Binding NewsBody, Mode=TwoWay}" TextWrapping="Wrap" Style="{StaticResource PhoneTextNormalStyle}"/>
                     <Image Height="100" Width="100" Source="{Binding ImageURL, Mode=TwoWay}" Margin="12,0,9,0"/>
 
@@ -47,6 +47,29 @@
         </Grid>
 
     </Grid>
+
+    <toolkit:TransitionService.NavigationInTransition>
+        <toolkit:NavigationInTransition>
+            <toolkit:NavigationInTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardIn"/>
+            </toolkit:NavigationInTransition.Backward>
+            <toolkit:NavigationInTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardIn"/>
+            </toolkit:NavigationInTransition.Forward>
+        </toolkit:NavigationInTransition>
+    </toolkit:TransitionService.NavigationInTransition>
+    <toolkit:TransitionService.NavigationOutTransition>
+        <toolkit:NavigationOutTransition>
+            <toolkit:NavigationOutTransition.Backward>
+                <toolkit:TurnstileTransition Mode="BackwardOut"/>
+            </toolkit:NavigationOutTransition.Backward>
+            <toolkit:NavigationOutTransition.Forward>
+                <toolkit:TurnstileTransition Mode="ForwardOut"/>
+            </toolkit:NavigationOutTransition.Forward>
+        </toolkit:NavigationOutTransition>
+    </toolkit:TransitionService.NavigationOutTransition>
+
+
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="Img/appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>

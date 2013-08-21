@@ -43,57 +43,6 @@ namespace Muse
 				return viewModel;
 			}
 		}
-
-        //private static NewsViewModel newsViewModel = null;
-        ///// <summary>
-        ///// A static NewsViewModel used by the views to bind against.
-        ///// </summary>
-        ///// <returns>The MainViewModel object.</returns>
-        //public static NewsViewModel NewsViewModel
-        //{
-        //    get
-        //    {
-        //        // Delay creation of the view model until necessary
-        //        if (newsViewModel == null)
-        //            newsViewModel = new NewsViewModel("test","","","");
-
-        //        return newsViewModel;
-        //    }
-        //}
-
-        //private static TourViewModel tourViewModel = null;
-        ///// <summary>
-        ///// A static NewsViewModel used by the views to bind against.
-        ///// </summary>
-        ///// <returns>The MainViewModel object.</returns>
-        //public static TourViewModel TourViewModel
-        //{
-        //    get
-        //    {
-        //        // Delay creation of the view model until necessary
-        //        if (tourViewModel == null)
-        //            tourViewModel = new TourViewModel("test","","","");
-
-        //        return tourViewModel;
-        //    }
-        //}
-
-        //private static PhotoViewModel photoViewModel = null;
-        ///// <summary>
-        ///// A static NewsViewModel used by the views to bind against.
-        ///// </summary>
-        ///// <returns>The MainViewModel object.</returns>
-        //public static PhotoViewModel PhotoViewModel
-        //{
-        //    get
-        //    {
-        //        // Delay creation of the view model until necessary
-        //        if (photoViewModel == null)
-        //            photoViewModel = new PhotoViewModel("test","","","");
-
-        //        return photoViewModel;
-        //    }
-        //}
 		
 		/// <summary>
 		/// Provides easy access to the root frame of the Phone Application.
@@ -223,7 +172,8 @@ namespace Muse
 
 			// Create the frame but don't set it as RootVisual yet; this allows the splash
 			// screen to remain active until the application is ready to render.
-			RootFrame = new PhoneApplicationFrame();
+			//RootFrame = new PhoneApplicationFrame();
+            RootFrame = new TransitionFrame();
 			RootFrame.Navigated += CompleteInitializePhoneApplication;
 
 			// Handle navigation failures

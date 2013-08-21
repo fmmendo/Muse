@@ -13,13 +13,12 @@ using Microsoft.Phone.Controls;
 
 namespace Muse
 {
-	public partial class NewsPage : PhoneApplicationPage
-	{
-		public NewsPage()
-		{
-			InitializeComponent();
-
-			DataContext = App.MuseService.CurrentItem;
+    public partial class NewsPage : PhoneApplicationPage
+    {
+        public NewsPage()
+        {
+            InitializeComponent();
+            DataContext = App.MuseService.CurrentItem;
         }
 
         private void WebBrowser_OnLoaded(object sender, RoutedEventArgs e)
@@ -27,20 +26,21 @@ namespace Muse
 
         }
 
-
-		private void Back_Click(object sender, EventArgs e)
-		{
+        private void Back_Click(object sender, EventArgs e)
+        {
             App.MuseService.CurrentItemIndex -= 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
+            NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
             DataContext = App.MuseService.CurrentItem;
-		}
+        }
 
-		private void Next_Click(object sender, EventArgs e)
+        private void Next_Click(object sender, EventArgs e)
         {
             App.MuseService.CurrentItemIndex += 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
+            NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
             DataContext = App.MuseService.CurrentItem;
-		}
+        }
 
         private void GestureListener_Flick(object sender, FlickGestureEventArgs e)
         {
@@ -61,16 +61,16 @@ namespace Muse
             if (e.Direction == System.Windows.Controls.Orientation.Horizontal)
             {
                 var m = ContentPanel.Margin;
-                if (ContentPanel.Opacity > 0 && ContentPanel.Opacity > (Math.Abs(e.HorizontalChange)/100))
-                ContentPanel.Opacity -= (Math.Abs(e.HorizontalChange)/100);
-                ContentPanel.Margin = new Thickness(m.Left+e.HorizontalChange, m.Top, m.Right-e.HorizontalChange, m.Bottom);
+                if (ContentPanel.Opacity > 0 && ContentPanel.Opacity > (Math.Abs(e.HorizontalChange) / 100))
+                    ContentPanel.Opacity -= (Math.Abs(e.HorizontalChange) / 100);
+                ContentPanel.Margin = new Thickness(m.Left + e.HorizontalChange, m.Top, m.Right - e.HorizontalChange, m.Bottom);
             }
         }
 
         private void GestureListener_DragCompleted(object sender, DragCompletedGestureEventArgs e)
         {
-            ContentPanel.Margin = new Thickness(12,0,12,0);
+            ContentPanel.Margin = new Thickness(12, 0, 12, 0);
             ContentPanel.Opacity = 1;
         }
-	}
+    }
 }
