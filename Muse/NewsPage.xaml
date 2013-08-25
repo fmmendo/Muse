@@ -26,7 +26,7 @@
             <!--<TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="news" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>-->
             <TextBlock x:Name="ApplicationTitle" Text="news" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="{Binding Title, Mode=TwoWay}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="{StaticResource PhoneFontSizeLarge}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Title, Mode=TwoWay}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}" FontSize="{StaticResource PhoneFontSizeLarge}" TextWrapping="Wrap"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->

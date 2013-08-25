@@ -153,9 +153,13 @@ namespace Muse.Data.RSS
             Title = title;
             Link = link;
             Description = description;
+            //Description = GetDescription(description);
             PubDate = pubdate;
             GetTourDate();
             /* Prepare some muse specific data */
+
+            //GetDescription();
+            Description = GetDescription(description);
             LoadHeavyDutyData();
         }
 
@@ -186,7 +190,6 @@ namespace Muse.Data.RSS
 
         void bw_DoWork(object sender, DoWorkEventArgs e)
         {
-            GetDescription();
             GetImageAndNewsBody();
         }
 
@@ -214,9 +217,9 @@ namespace Muse.Data.RSS
                 TourDate = DateTime.Parse(strDate);
             }
         }
-        private void GetDescription()
+        private string GetDescription(string src)
         {
-            var desc = Description;
+            var desc = src;
 
             //if (String.IsNullOrEmpty(MonthYear))
             //{
@@ -254,12 +257,15 @@ namespace Muse.Data.RSS
                         endtag = desc.IndexOf(">", endImage);
                         if (endtag >= endImage)
                         {
-                            System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                            {
-                                ImageThumb = desc.Substring(startImage, endImage - startImage);
-                                ImageURL = ImageThumb.Replace("thumb", "original");
+                            //System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
+                            //{
+                                _imageThumb = desc.Substring(startImage, endImage - startImage);
+                                _imageURL = ImageThumb.Replace("thumb", "original");
                                 desc = desc.Substring(endtag + 1);
-                            });
+
+                                NotifyPropertyChanged("ImageThumb");
+                                NotifyPropertyChanged("ImageURL");
+                            //});
                         }
                     }
                 }
@@ -285,12 +291,32 @@ namespace Muse.Data.RSS
                 var str = desc.Substring(start, end - start + 1);
                 desc = desc.Replace(str, "");
             }
-            while (desc.Contains("<span style"))
+            while (desc.Contains("<span "))
             {
                 int start = -1;
                 int end = -1;
 
-                start = desc.IndexOf("<span style", 0);
+                start = desc.IndexOf("<span ", 0);
+                end = desc.IndexOf(">", start + 1);
+                var str = desc.Substring(start, end - start + 1);
+                desc = desc.Replace(str, "");
+            }
+            while (desc.Contains("<iframe "))
+            {
+                int start = -1;
+                int end = -1;
+
+                start = desc.IndexOf("<iframe ", 0);
+                end = desc.IndexOf(">", start + 1);
+                var str = desc.Substring(start, end - start + 1);
+                desc = desc.Replace(str, "");
+            }
+            while (desc.Contains("<img"))
+            {
+                int start = -1;
+                int end = -1;
+
+                start = desc.IndexOf("<img", 0);
                 end = desc.IndexOf(">", start + 1);
                 var str = desc.Substring(start, end - start + 1);
                 desc = desc.Replace(str, "");
@@ -298,14 +324,30 @@ namespace Muse.Data.RSS
 
             //_description = "<html><body>" + _description + "</body></html>";
             // remove html tags (won't be necessary once we use a webview
-            desc = desc.Replace("<b>", "<bold>").Replace("</b>", "</bold>")
-                       .Replace("<p>", "\n").Replace("</p>", "")
-                       .Replace("&nbsp;", " ").Replace("&#39;", "'").Replace("&pound;", "£")
+            desc = desc.Replace("<b>", "").Replace("</b>", "")
+                       .Replace("<p>", "\n").Replace("</p>", "").Replace("</iframe>", "")
+                       .Replace("&iexcl;", "¡")
+                       .Replace("&Agrave;", "À").Replace("&Aacute;", "Á")
+                       .Replace("&Egrave;", "È").Replace("&Eacute;", "É")
+                       .Replace("&Igrave;", "Ì").Replace("&Iacute;", "Í")
+                       .Replace("&Ograve;", "Ò").Replace("&Oacute;", "Ó")
+                       .Replace("&Ugrave;", "Ù").Replace("&Uacute;", "Ú")
+                       .Replace("&agrave;", "à").Replace("&aacute;", "á")
+                       .Replace("&egrave;", "è").Replace("&eacute;", "é")
+                       .Replace("&igrave;", "ì").Replace("&iacute;", "í")
+                       .Replace("&ograve;", "ò").Replace("&oacute;", "ó")
+                       .Replace("&ugrave;", "ù").Replace("&uacute;", "ú")
+                       .Replace("&aring;", "å").Replace("&oslash;", "ø")
+                       .Replace("&auml;", "ä").Replace("&ouml;", "ö")
+                       .Replace("&nbsp;", " ").Replace("&#39;", "'")
+                       .Replace("&pound;", "£").Replace("&quot;","\"")
                        .Replace("<div>", "").Replace("</div>", "")
+                       .Replace("<img>", "").Replace("</img>", "")
                        .Replace("<span>", "").Replace("</span>", "")
+                       .Replace("<a>", "").Replace("</a>", "")
                        .Replace("<br />", "\n").Replace("</br>", "\n");
 
-            Description = desc;
+            return desc;
         }
         private void GetImageAndNewsBody()
         {
@@ -367,6 +409,7 @@ namespace Muse.Data.RSS
                 System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     NewsBody = desc;
+                    NewsBody = GetDescription(_newsBody);
                 });
                 index = end = start = -1;
             }
