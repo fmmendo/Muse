@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{5ec3a382-900e-4b64-a866-a2f3153db9cc}" Title="Muse" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Muse author" Description="Sample description" Publisher="Muse">
+  <App xmlns="" ProductID="{5ec3a382-900e-4b64-a866-a2f3153db9cc}" Title="Muse" RuntimeType="Silverlight" Version="1.2.0.0" Genre="apps.normal" Author="Muse author" Description="Sample description" Publisher="Muse">
     <IconPath IsRelative="true" IsResource="false">Img\MuseIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

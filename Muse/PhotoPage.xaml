@@ -42,7 +42,8 @@
                            Margin="0,0,0,0"
                            ManipulationDelta="photo_ManipulationDelta"
                            ManipulationCompleted="photo_ManipulationCompleted"
-                           ManipulationStarted="photo_ManipulationStarted" >
+                           ManipulationStarted="photo_ManipulationStarted"
+                           CacheMode="BitmapCache">
                 <Image.RenderTransform>
                     <TransformGroup>
                     <!--<CompositeTransform x:Name="ImageTransform" ScaleX="1" ScaleY="1"></CompositeTransform>-->
