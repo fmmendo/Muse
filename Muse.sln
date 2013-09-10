@@ -8,21 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseWP8", "MuseWP8\MuseWP8.csproj", "{7CEF948D-FDE1-4DD9-BC5D-4CE69BF55BF0}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs28
-		SccProjectUniqueName0 = Muse.Data\\Muse.Data.csproj
-		SccProjectName0 = Muse.Data
-		SccAuxPath0 = https://tfs.codeplex.com/tfs/tfs28
-		SccLocalPath0 = Muse.Data
-		SccProvider0 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccProjectUniqueName1 = Muse\\Muse.csproj
-		SccProjectName1 = Muse
-		SccAuxPath1 = https://tfs.codeplex.com/tfs/tfs28
-		SccLocalPath1 = Muse
-		SccProvider1 = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

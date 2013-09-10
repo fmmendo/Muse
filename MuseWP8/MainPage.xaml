@@ -11,46 +11,20 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="False">
 
-    <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <!-- LOCALIZATION NOTE:
-            To localize the displayed strings copy their values to appropriately named
-            keys in the app's neutral language resource file (AppResources.resx) then
-            replace the hard-coded text value between the attributes' quotation marks
-            with the binding clause whose path points to that string name.
-
-            For example:
-
-                Text="{Binding Path=LocalizedResources.ApplicationTitle, Source={StaticResource LocalizedStrings}}"
-
-            This binding points to the template's string resource named "ApplicationTitle".
-
-            Adding supported languages in the Project Properties tab will create a
-            new resx file per language that can carry the translated values of your
-            UI strings. The binding in these examples will cause the value of the
-            attributes to be drawn from the .resx file that matches the
-            CurrentUICulture of the app at run time.
-         -->
-
-        <!--Panorama control-->
+    <!--LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot">
         <phone:Panorama Title="muse" Foreground="White">
             <phone:Panorama.Background>
-                <ImageBrush ImageSource="Img/Background.png"/>
+                <ImageBrush ImageSource="Assets/Background.png"/>
             </phone:Panorama.Background>
 
-            <!-- NEWS -->
-            <phone:PanoramaItem Header="news" Foreground="White">
+            <!--NEWS-->
+            <phone:PanoramaItem Header="news">
                 <ListBox Margin="0,0,-12,0" 
 						 ItemsSource="{Binding Items}">
-
-                    <!--<toolkit:GestureService.GestureListener>
-                        <toolkit:GestureListener Tap="GestureListener_Tap" />
-                    </toolkit:GestureService.GestureListener>-->
-
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" 
@@ -60,37 +34,29 @@
                                        VerticalAlignment="Top"
 									   Source="{Binding ImageURL}" 
 									   Margin="12,0,9,0"/>
-                                <StackPanel Width="311">
-                                    <!-- News Title -->
-                                    <TextBlock Text="{Binding Title}" 
+                                <!-- News Title -->
+                                <TextBlock Text="{Binding Title}" 
 											   TextWrapping="Wrap" 
 											   Style="{StaticResource PhoneTextTitle3Style}"
                                                FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                                                MaxHeight="80"
                                                Foreground="White"/>
-                                    <!-- News Publication Date -->
-                                    <TextBlock Text="{Binding Description}" 
+                                <!-- News Publication Date -->
+                                <TextBlock Text="{Binding Description}" 
 											   TextWrapping="Wrap" 
 											   Style="{StaticResource PhoneTextSubtleStyle}" 
                                                FontSize="{StaticResource PhoneFontSizeSmall}"
                                                Foreground="#FF999999"/>
-                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
             </phone:PanoramaItem>
 
-            <!-- TOUR -->
-            <phone:PanoramaItem Header="tour" Foreground="White">
+            <!--TOUR-->
+            <phone:PanoramaItem Header="tour">
                 <ListBox Margin="0,0,-12,0" 
 						 ItemsSource="{Binding TourDates}">
-
-                    <!--<toolkit:GestureService.GestureListener>
-                        <toolkit:GestureListener Tap="GestureListener_Tap_tour"></toolkit:GestureListener>
-                    </toolkit:GestureService.GestureListener>-->
-
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" 
@@ -142,49 +108,15 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
             </phone:PanoramaItem>
-
             <!-- GALLERY -->
             <phone:PanoramaItem Header="photos" Foreground="White">
                 <ListBox Margin="0,0,0,0" 
 						 ItemsSource="{Binding Photos}">
 
-                    <!--<toolkit:GestureService.GestureListener>
-                        <toolkit:GestureListener Tap="GestureListener_Tap_photo"></toolkit:GestureListener>
-                    </toolkit:GestureService.GestureListener>-->
-
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <!--<toolkit:WrapPanel Orientation="Horizontal" 
-											   Margin="0,0,0,17"
-											   ItemHeight="140" ItemWidth="140" Width="450">
-
-                            </toolkit:WrapPanel>-->
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Border BorderThickness="5"
-								    BorderBrush="Black">
-                                <Image Height="120" 
-								   Width="120" 
-								   Source="{Binding ImageThumb}" 
-								   Margin="0"/>
-                            </Border>
-                        </DataTemplate>
-
-                    </ListBox.ItemTemplate>
 
                 </ListBox>
             </phone:PanoramaItem>
         </phone:Panorama>
-
-    <!--Uncomment to see an alignment grid to help ensure your controls are
-            aligned on common boundaries.  The image has a top margin of -32px to
-            account for the System Tray. Set this to 0 (or remove the margin altogether)
-            if the System Tray is hidden.
-
-            Before shipping remove this XAML and the image itself.-->
-        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
     </Grid>
 
 </phone:PhoneApplicationPage>
