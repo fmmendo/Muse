@@ -338,6 +338,8 @@ namespace Muse.Data.RSS
                        .Replace("&ograve;", "ò").Replace("&oacute;", "ó")
                        .Replace("&ugrave;", "ù").Replace("&uacute;", "ú")
                        .Replace("&aring;", "å").Replace("&oslash;", "ø")
+                       .Replace("&ccedil;", "ç").Replace("&atilde;", "ã")
+                       .Replace("&otilde;", "õ").Replace("&scaron;", "š")
                        .Replace("&auml;", "ä").Replace("&ouml;", "ö")
                        .Replace("&nbsp;", " ").Replace("&#39;", "'")
                        .Replace("&pound;", "£").Replace("&quot;","\"")

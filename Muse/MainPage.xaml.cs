@@ -19,20 +19,6 @@ namespace Muse
 
 			// Set the data context of the listbox control
 			DataContext = App.ViewModel;
-			this.Loaded += new RoutedEventHandler(MainPage_Loaded);
-		}
-
-		/// <summary>
-		/// Load data for the ViewModel Items
-		/// </summary>
-		/// <param name="sender"></param>
-		/// <param name="e"></param>
-		private void MainPage_Loaded(object sender, RoutedEventArgs e)
-		{
-            if (!HasUserSeenIntro())
-            {
-                MessageBox.Show("Hey Musers!\n\nThanks for downloading the App (and being patient with the bugs :) )\n\nThis new build has a few more fixes and a few new bits, and I'm currently working on a big overhaul of the app so feel free to leave more comments and suggestions in the ratings, and I'll add them to the ToDo list!\n\nSee ya soon!");
-            }
 		}
 
 		#region Gesture Handlers
