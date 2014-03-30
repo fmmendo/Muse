@@ -13,6 +13,7 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
+<<<<<<< HEAD:Muse.WP8/MainPage.xaml
   shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
@@ -40,6 +41,15 @@
         <phone:Panorama Title="muse">
             <phone:Panorama.Background>
                 <ImageBrush ImageSource="Assets\Background.png" Stretch="UniformToFill" />
+=======
+    shell:SystemTray.IsVisible="False">
+
+    <!--LayoutRoot contains the root grid where all other page content is placed-->
+    <Grid x:Name="LayoutRoot">
+        <phone:Panorama Title="muse" Foreground="White">
+            <phone:Panorama.Background>
+                <ImageBrush ImageSource="Assets/Background.png"/>
+>>>>>>> 7f8fb9df618b7a237020c30e577bba1b5974f6b1:MuseWP8/MainPage.xaml
             </phone:Panorama.Background>
             
             <!--Panorama item one-->
@@ -49,10 +59,18 @@
                 </ListBox>
             </phone:PanoramaItem>-->
 
+<<<<<<< HEAD:Muse.WP8/MainPage.xaml
             <!--Panorama item one-->
             <phone:PanoramaItem Header="news">
                 <rad:RadDataBoundListBox ItemsSource="{Binding Items}" Tap="RadDataBoundListBox_Tap">
                     <rad:RadDataBoundListBox.ItemTemplate>
+=======
+            <!--NEWS-->
+            <phone:PanoramaItem Header="news">
+                <ListBox Margin="0,0,-12,0" 
+						 ItemsSource="{Binding Items}">
+                    <ListBox.ItemTemplate>
+>>>>>>> 7f8fb9df618b7a237020c30e577bba1b5974f6b1:MuseWP8/MainPage.xaml
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" 
 										Margin="0,0,0,17">
@@ -61,21 +79,19 @@
                                        VerticalAlignment="Top"
 									   Source="{Binding ImageURL}" 
 									   Margin="12,0,9,0"/>
-                                <StackPanel Width="311">
-                                    <!-- News Title -->
-                                    <TextBlock Text="{Binding Title}" 
+                                <!-- News Title -->
+                                <TextBlock Text="{Binding Title}" 
 											   TextWrapping="Wrap" 
 											   Style="{StaticResource PhoneTextTitle3Style}"
                                                FontSize="{StaticResource PhoneFontSizeMediumLarge}"
                                                MaxHeight="80"
                                                Foreground="White"/>
-                                    <!-- News Publication Date -->
-                                    <TextBlock Text="{Binding Description}" 
+                                <!-- News Publication Date -->
+                                <TextBlock Text="{Binding Description}" 
 											   TextWrapping="Wrap" 
 											   Style="{StaticResource PhoneTextSubtleStyle}" 
                                                FontSize="{StaticResource PhoneFontSizeSmall}"
                                                Foreground="#FF999999"/>
-                                </StackPanel>
                             </StackPanel>
                         </DataTemplate>
                     </rad:RadDataBoundListBox.ItemTemplate>
@@ -90,6 +106,7 @@
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
+<<<<<<< HEAD:Muse.WP8/MainPage.xaml
                 </ListBox>-->
             </phone:PanoramaItem>
 
@@ -99,6 +116,16 @@
                 <!--Double line list with image placeholder and text wrapping-->
                 <rad:RadDataBoundListBox Margin="0,0,-12,0" ItemsSource="{Binding TourDates}" Tap="RadDataBoundListBox_Tap_Tour">
                     <rad:RadDataBoundListBox.ItemTemplate>
+=======
+                </ListBox>
+            </phone:PanoramaItem>
+
+            <!--TOUR-->
+            <phone:PanoramaItem Header="tour">
+                <ListBox Margin="0,0,-12,0" 
+						 ItemsSource="{Binding TourDates}">
+                    <ListBox.ItemTemplate>
+>>>>>>> 7f8fb9df618b7a237020c30e577bba1b5974f6b1:MuseWP8/MainPage.xaml
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" 
 										Margin="0,0,0,17">
@@ -149,6 +176,7 @@
                     </rad:RadDataBoundListBox.ItemTemplate>
                 </rad:RadDataBoundListBox>
             </phone:PanoramaItem>
+<<<<<<< HEAD:Muse.WP8/MainPage.xaml
 
             <!--Panorama item three-->
             <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
@@ -176,11 +204,19 @@
                         </DataTemplate>
 
                     </ListBox.ItemTemplate>
+=======
+            <!-- GALLERY -->
+            <phone:PanoramaItem Header="photos" Foreground="White">
+                <ListBox Margin="0,0,0,0" 
+						 ItemsSource="{Binding Photos}">
+
+>>>>>>> 7f8fb9df618b7a237020c30e577bba1b5974f6b1:MuseWP8/MainPage.xaml
 
                 </ListBox>
             </phone:PanoramaItem>
 
         </phone:Panorama>
+<<<<<<< HEAD:Muse.WP8/MainPage.xaml
 
         <!--Uncomment to see an alignment grid to help ensure your controls are
             aligned on common boundaries.  The image has a top margin of -32px to
@@ -190,6 +226,8 @@
             Before shipping remove this XAML and the image itself.-->
         <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0" Grid.Row="0" Grid.RowSpan="2" IsHitTestVisible="False" />-->
 
+=======
+>>>>>>> 7f8fb9df618b7a237020c30e577bba1b5974f6b1:MuseWP8/MainPage.xaml
     </Grid>
 
     <!--Sample code showing usage of ApplicationBar-->
