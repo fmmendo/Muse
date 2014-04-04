@@ -72,23 +72,23 @@ namespace Muse.Data
 
         public void LoadItem(MuseDataType type)
         {
-            switch (type)
-            {
-                case MuseDataType.News:
-                    if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
-                        CurrentItem = Items[CurrentItemIndex];
-                    break;
-                case MuseDataType.Tour:
-                    if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
-                        CurrentItem = TourDates[CurrentItemIndex];
-                    break;
-                case MuseDataType.Photo:
-                    if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
-                        CurrentItem = Photos[CurrentItemIndex];
-                    break;
-            }
-            NotifyPropertyChanged("CurrentItem");
-            CurrentItem.NotifyAll();
+                switch (type)
+                {
+                    case MuseDataType.News:
+                        if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
+                            CurrentItem = Items[CurrentItemIndex];
+                        break;
+                    case MuseDataType.Tour:
+                        if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
+                            CurrentItem = TourDates[CurrentItemIndex];
+                        break;
+                    case MuseDataType.Photo:
+                        if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
+                            CurrentItem = Photos[CurrentItemIndex];
+                        break;
+                }
+                NotifyPropertyChanged("CurrentItem");
+                CurrentItem.NotifyAll();
         }
 
         public enum MuseDataType
