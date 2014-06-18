@@ -44,6 +44,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
             <shell:ApplicationBarIconButton IconUri="Assets\appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Assets\download.png" IsEnabled="True" Text="Save" Click="Save_Click" ></shell:ApplicationBarIconButton>
             <shell:ApplicationBarIconButton IconUri="Assets\appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>

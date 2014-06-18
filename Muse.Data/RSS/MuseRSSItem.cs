@@ -153,12 +153,10 @@ namespace Muse.Data.RSS
             Title = title;
             Link = link;
             Description = description;
-            //Description = GetDescription(description);
             PubDate = pubdate;
             GetTourDate();
-            /* Prepare some muse specific data */
 
-            //GetDescription();
+            /* Prepare some muse specific data */
             Description = GetDescription(description);
             LoadHeavyDutyData();
         }
@@ -198,13 +196,6 @@ namespace Muse.Data.RSS
         /// </summary>
         private void GetTourDate()
         {
-            //DateTime date;
-            //if (Title.Length > 10 && DateTime.TryParse(Title.Substring(0, 10), out date))
-            //{
-            //    TourDate = date;
-            //    Title = Title.Remove(0, 13);
-            //}
-
             int start = -1;
             int end = -1;
 
@@ -220,25 +211,6 @@ namespace Muse.Data.RSS
         private string GetDescription(string src)
         {
             var desc = src;
-
-            //if (String.IsNullOrEmpty(MonthYear))
-            //{
-            //    int start = -1;
-            //    int end = -1;
-
-            //    start = desc.IndexOf("<b>On:</b>");
-            //    end = desc.IndexOf("<br />");
-
-            //    if (start >= 0 && end > 0 && end > start)
-            //    {
-            //        string date = desc.Substring(start + 10, end - (start + 10)).Trim();
-            //        string[] split = date.Split(new char[] { ' ' });
-            //        System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-            //        {
-            //            TourDate = DateTime.Parse(String.Format("{0} {1} {2}", split[0], split[1], split[2]));
-            //        });
-            //    }
-            //}
 
             // remove the ImageURL from the description
             if (String.IsNullOrEmpty(ImageURL))
@@ -257,97 +229,30 @@ namespace Muse.Data.RSS
                         endtag = desc.IndexOf(">", endImage);
                         if (endtag >= endImage)
                         {
-                            //System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                            //{
-                                _imageThumb = desc.Substring(startImage, endImage - startImage);
-                                _imageURL = ImageThumb.Replace("thumb", "original");
-                                desc = desc.Substring(endtag + 1);
-
-                                NotifyPropertyChanged("ImageThumb");
-                                NotifyPropertyChanged("ImageURL");
-                            //});
+                            var url = desc.Substring(startImage, endImage - startImage);
+                            if (url.Contains("thumb"))
+                            {
+                                _imageThumb = url;
+                                _imageURL = url.Replace("thumb", "original");
+                            }
+                            else if (url.Contains("square"))
+                            {
+                                _imageThumb = url.Replace("square", "thumb");
+                                _imageURL = url.Replace("square", "original");
+                            }
+                            else
+                            {
+                                _imageThumb = url.Replace("original", "thumb");
+                                _imageURL = url;
+                            }
+                            //_imageURL = desc.Substring(startImage, endImage - startImage);
+                            //ImageThumb = _imageURL;
+                            NotifyPropertyChanged("ImageThumb");
+                            NotifyPropertyChanged("ImageURL");
                         }
                     }
                 }
             }
-
-            while (desc.Contains("<a href"))
-            {
-                int start = -1;
-                int end = -1;
-
-                start = desc.IndexOf("<a href", 0);
-                end = desc.IndexOf(">", start);
-                var str = desc.Substring(start, end - start + 1);
-                desc = desc.Replace(str, "");
-            }
-            while (desc.Contains("<p style"))
-            {
-                int start = -1;
-                int end = -1;
-
-                start = desc.IndexOf("<p style", 0);
-                end = desc.IndexOf(">", start + 1);
-                var str = desc.Substring(start, end - start + 1);
-                desc = desc.Replace(str, "");
-            }
-            while (desc.Contains("<span "))
-            {
-                int start = -1;
-                int end = -1;
-
-                start = desc.IndexOf("<span ", 0);
-                end = desc.IndexOf(">", start + 1);
-                var str = desc.Substring(start, end - start + 1);
-                desc = desc.Replace(str, "");
-            }
-            while (desc.Contains("<iframe "))
-            {
-                int start = -1;
-                int end = -1;
-
-                start = desc.IndexOf("<iframe ", 0);
-                end = desc.IndexOf(">", start + 1);
-                var str = desc.Substring(start, end - start + 1);
-                desc = desc.Replace(str, "");
-            }
-            while (desc.Contains("<img"))
-            {
-                int start = -1;
-                int end = -1;
-
-                start = desc.IndexOf("<img", 0);
-                end = desc.IndexOf(">", start + 1);
-                var str = desc.Substring(start, end - start + 1);
-                desc = desc.Replace(str, "");
-            }
-
-            //_description = "<html><body>" + _description + "</body></html>";
-            // remove html tags (won't be necessary once we use a webview
-            desc = desc.Replace("<b>", "").Replace("</b>", "")
-                       .Replace("<p>", "\n").Replace("</p>", "").Replace("</iframe>", "")
-                       .Replace("&iexcl;", "¡")
-                       .Replace("&Agrave;", "À").Replace("&Aacute;", "Á")
-                       .Replace("&Egrave;", "È").Replace("&Eacute;", "É")
-                       .Replace("&Igrave;", "Ì").Replace("&Iacute;", "Í")
-                       .Replace("&Ograve;", "Ò").Replace("&Oacute;", "Ó")
-                       .Replace("&Ugrave;", "Ù").Replace("&Uacute;", "Ú")
-                       .Replace("&agrave;", "à").Replace("&aacute;", "á")
-                       .Replace("&egrave;", "è").Replace("&eacute;", "é")
-                       .Replace("&igrave;", "ì").Replace("&iacute;", "í")
-                       .Replace("&ograve;", "ò").Replace("&oacute;", "ó")
-                       .Replace("&ugrave;", "ù").Replace("&uacute;", "ú")
-                       .Replace("&aring;", "å").Replace("&oslash;", "ø")
-                       .Replace("&ccedil;", "ç").Replace("&atilde;", "ã")
-                       .Replace("&otilde;", "õ").Replace("&scaron;", "š")
-                       .Replace("&auml;", "ä").Replace("&ouml;", "ö")
-                       .Replace("&nbsp;", " ").Replace("&#39;", "'")
-                       .Replace("&pound;", "£").Replace("&quot;","\"")
-                       .Replace("<div>", "").Replace("</div>", "")
-                       .Replace("<img>", "").Replace("</img>", "")
-                       .Replace("<span>", "").Replace("</span>", "")
-                       .Replace("<a>", "").Replace("</a>", "")
-                       .Replace("<br />", "\n").Replace("</br>", "\n");
 
             return desc;
         }
@@ -394,10 +299,14 @@ namespace Muse.Data.RSS
                 start = html.Substring(index).IndexOf("content=") + 8;
                 end = html.Substring(index).IndexOf("\" />");
                 string url = html.Substring(index + start + 1, end - (start + 1));
-                if (url.Contains("thumb")) url = url.Replace("thumb", "square");
+                if (url.Contains("thumb"))
+                    url = url.Replace("thumb", "original");
+                else if (url.Contains("square"))
+                    url = url.Replace("square", "original");
                 System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     ImageURL = url;
+                    ImageThumb = ImageURL.Replace("original", "thumb");
                 });
                 index = end = start = -1;
             }

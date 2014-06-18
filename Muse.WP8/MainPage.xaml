@@ -63,7 +63,7 @@
                                 <Image Height="100" 
 									   Width="100" 
                                        VerticalAlignment="Top"
-									   Source="{Binding ImageURL}" 
+									   Source="{Binding ImageThumb}" 
 									   Margin="12,0,9,0"/>
                                 <StackPanel Width="311">
                                     <!-- News Title -->

@@ -155,7 +155,8 @@ namespace Muse.WP8
             if (System.Diagnostics.Debugger.IsAttached)
             {
                 // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
+                throw e.ExceptionObject;
+                //System.Diagnostics.Debugger.Break();
             }
         }
 

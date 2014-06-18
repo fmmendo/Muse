@@ -8,6 +8,18 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
+
+
+using System.Diagnostics;
+using System.Text;
+using System.Windows.Documents;
+using System.Windows.Input;
+using HtmlAgilityPack;
+using System.Windows.Media;
+using System.Windows.Data;
+using System.Windows.Media.Imaging;
+using System.ComponentModel;
+
 namespace Muse.WP8
 {
     public partial class NewsPage : PhoneApplicationPage
@@ -16,16 +28,14 @@ namespace Muse.WP8
         {
             InitializeComponent();
 
-            DataContext = App.ViewModel;//urrentItem;
+            DataContext = App.ViewModel;
         }
-        
+
         private void Back_Click(object sender, EventArgs e)
         {
             App.MuseService.CurrentItemIndex -= 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
             radSlideView.MoveToPreviousItem(true);
-            //NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
-            //DataContext = App.MuseService.CurrentItem;
         }
 
         private void Next_Click(object sender, EventArgs e)
@@ -33,8 +43,6 @@ namespace Muse.WP8
             App.MuseService.CurrentItemIndex += 1;
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.News);
             radSlideView.MoveToNextItem(true);
-            //NavigationService.Navigate(new Uri("/NewsPage.xaml", UriKind.Relative));
-            //DataContext = App.MuseService.CurrentItem;
         }
     }
 }
