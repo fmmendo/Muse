@@ -3,11 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace Muse.Data
 {
@@ -47,6 +52,20 @@ namespace Muse.Data
             Items = new ObservableCollection<MuseRSSItem>();
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
+
+            #region load cache, ugly code for testing purposes only
+            Task t = new Task( async () =>
+            {
+                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
+                using (IInputStream inStream = await file.OpenSequentialReadAsync())
+                {
+                    DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+                    Items = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+                }
+            });
+            t.Start();
+            t.Wait();
+            #endregion
         }
 
         public bool LoadData()
@@ -103,11 +122,11 @@ namespace Muse.Data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void wc_DownloadStringCompleted_news(object sender, DownloadStringCompletedEventArgs e)
+        async void wc_DownloadStringCompleted_news(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null) return;
-
-            var xmlItems = System.Xml.Linq.XElement.Parse(e.Result);
+            
+                        var xmlItems = System.Xml.Linq.XElement.Parse(e.Result);
 
             foreach (var item in xmlItems.Descendants("item"))
             {
@@ -120,6 +139,23 @@ namespace Muse.Data
                     Items.Add(rssItem);
                 }
             }
+
+            #region cache data the ugly way, for testing purposes only
+            MemoryStream sessionData = new MemoryStream();
+            DataContractSerializer serializer = new
+            DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+            serializer.WriteObject(sessionData, Items);
+
+
+            StorageFile file = await ApplicationData.Current.LocalFolder
+                                     .CreateFileAsync("newsCache");
+            using (Stream fileStream = await file.OpenStreamForWriteAsync())
+            {
+                sessionData.Seek(0, SeekOrigin.Begin);
+                await sessionData.CopyToAsync(fileStream);
+                await fileStream.FlushAsync();
+            }
+            #endregion
 
             if (Items.Count <= 0)
             {
