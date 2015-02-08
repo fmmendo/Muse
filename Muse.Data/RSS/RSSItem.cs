@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Muse.Data.RSS
 {
+    [DataContract]
     public class RSSItem : INotifyPropertyChanged
     {
         #region Properties
         private string _title;
+        [DataMember]
         /// <summary>
         /// Title, holds the title for the RSS feed item
         /// </summary>
@@ -28,6 +31,7 @@ namespace Muse.Data.RSS
         }
 
         private string _description;
+        [DataMember]
         /// <summary>
         /// Description, holds the content of the RSS feed item
         /// </summary>
@@ -49,6 +53,7 @@ namespace Muse.Data.RSS
         }
 
         private string _link;
+        [DataMember]
         /// <summary>
         /// Link, URL to the RSS item on the muse.mu website
         /// </summary>
@@ -70,6 +75,7 @@ namespace Muse.Data.RSS
         }
 
         private string _pubDate;
+        [DataMember]
         /// <summary>
         /// PubDate, Date in which the item was published
         /// </summary>

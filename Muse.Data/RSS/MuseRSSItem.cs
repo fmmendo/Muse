@@ -1,12 +1,15 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Runtime.Serialization;
 
 namespace Muse.Data.RSS
 {
+    [DataContract]
     public sealed class MuseRSSItem : RSSItem
     {
         #region Properties
         private string _itemID;
+        [DataMember]
         /// <summary>
         /// Number that identifies an item.
         /// </summary>
@@ -29,6 +32,7 @@ namespace Muse.Data.RSS
 
 
         public string _newsBody;
+        [DataMember]
         public string NewsBody
         {
             get { return _newsBody; }
@@ -43,6 +47,7 @@ namespace Muse.Data.RSS
         }
 
         private string _imageURL;
+        [DataMember]
         /// <summary>
         /// Image, url to the image that accompanies the news item.
         /// </summary>
@@ -64,6 +69,7 @@ namespace Muse.Data.RSS
         }
 
         private string _imageThumb;
+        [DataMember]
         /// <summary>
         /// Image, url to the image that accompanies the news item.
         /// </summary>
@@ -109,6 +115,7 @@ namespace Muse.Data.RSS
         }
 
         private DateTime _tourDate;
+        [DataMember]
         /// <summary>
         /// TourDate, holds the date for a gig.
         /// </summary>

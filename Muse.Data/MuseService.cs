@@ -53,19 +53,31 @@ namespace Muse.Data
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
 
-            #region load cache, ugly code for testing purposes only
-            Task t = new Task( async () =>
+            LoadCache();
+        }
+
+        private async Task LoadCache()
+        {
+            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
+            using (IInputStream inStream = await file.OpenSequentialReadAsync())
             {
-                StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
-                using (IInputStream inStream = await file.OpenSequentialReadAsync())
-                {
-                    DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-                    Items = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
-                }
-            });
-            t.Start();
-            t.Wait();
-            #endregion
+                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+                Items = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+            }
+
+            StorageFile file1 = await ApplicationData.Current.LocalFolder.GetFileAsync("tourCache");
+            using (IInputStream inStream = await file1.OpenSequentialReadAsync())
+            {
+                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+                TourDates = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+            }
+
+            StorageFile file2 = await ApplicationData.Current.LocalFolder.GetFileAsync("imageCache");
+            using (IInputStream inStream = await file2.OpenSequentialReadAsync())
+            {
+                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+                Photos = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+            }
         }
 
         public bool LoadData()
@@ -91,23 +103,23 @@ namespace Muse.Data
 
         public void LoadItem(MuseDataType type)
         {
-                switch (type)
-                {
-                    case MuseDataType.News:
-                        if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
-                            CurrentItem = Items[CurrentItemIndex];
-                        break;
-                    case MuseDataType.Tour:
-                        if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
-                            CurrentItem = TourDates[CurrentItemIndex];
-                        break;
-                    case MuseDataType.Photo:
-                        if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
-                            CurrentItem = Photos[CurrentItemIndex];
-                        break;
-                }
-                NotifyPropertyChanged("CurrentItem");
-                CurrentItem.NotifyAll();
+            switch (type)
+            {
+                case MuseDataType.News:
+                    if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
+                        CurrentItem = Items[CurrentItemIndex];
+                    break;
+                case MuseDataType.Tour:
+                    if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
+                        CurrentItem = TourDates[CurrentItemIndex];
+                    break;
+                case MuseDataType.Photo:
+                    if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
+                        CurrentItem = Photos[CurrentItemIndex];
+                    break;
+            }
+            NotifyPropertyChanged("CurrentItem");
+            CurrentItem.NotifyAll();
         }
 
         public enum MuseDataType
@@ -125,8 +137,8 @@ namespace Muse.Data
         async void wc_DownloadStringCompleted_news(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null) return;
-            
-                        var xmlItems = System.Xml.Linq.XElement.Parse(e.Result);
+
+            var xmlItems = System.Xml.Linq.XElement.Parse(e.Result);
 
             foreach (var item in xmlItems.Descendants("item"))
             {
@@ -140,27 +152,30 @@ namespace Muse.Data
                 }
             }
 
-            #region cache data the ugly way, for testing purposes only
+            if (Items.Count <= 0)
+            {
+                var rssItem = new MuseRSSItem("No News", "", "No news have been published.", "");
+                Items.Add(rssItem);
+            }
+            else
+            {
+                await CacheNewsItems();
+            }
+        }
+
+        private async Task CacheNewsItems()
+        {
             MemoryStream sessionData = new MemoryStream();
             DataContractSerializer serializer = new
             DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-            serializer.WriteObject(sessionData, Items);
+            serializer.WriteObject(sessionData, Items.OrderBy(i => DateTime.Parse(i.PubDate)));
 
-
-            StorageFile file = await ApplicationData.Current.LocalFolder
-                                     .CreateFileAsync("newsCache");
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("newsCache", CreationCollisionOption.ReplaceExisting);
             using (Stream fileStream = await file.OpenStreamForWriteAsync())
             {
                 sessionData.Seek(0, SeekOrigin.Begin);
                 await sessionData.CopyToAsync(fileStream);
                 await fileStream.FlushAsync();
-            }
-            #endregion
-
-            if (Items.Count <= 0)
-            {
-                var rssItem = new MuseRSSItem("No News", "", "No news have been published.", "");
-                Items.Add(rssItem);
             }
         }
 
