@@ -3,11 +3,16 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.Storage;
+using Windows.Storage.Streams;
 
 namespace Muse.Data
 {
@@ -47,7 +52,44 @@ namespace Muse.Data
             Items = new ObservableCollection<MuseRSSItem>();
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
+
+            //LoadCache();
         }
+
+        #region Cache
+        private async Task LoadCache()
+        {
+            Items = await LoadCacheFileToCollecton("newsCache");
+            //TourDates = await LoadCacheFileToCollecton("tourCache");
+            //Photos = await LoadCacheFileToCollecton("imageCache");
+        }
+
+        private async Task<ObservableCollection<MuseRSSItem>> LoadCacheFileToCollecton(string filename)
+        {
+            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
+            using (IInputStream inStream = await file.OpenSequentialReadAsync())
+            {
+                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+                return (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+            }
+        }
+
+        private async Task CacheNewsItems()
+        {
+            MemoryStream sessionData = new MemoryStream();
+            DataContractSerializer serializer = new
+            DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+            serializer.WriteObject(sessionData, Items);
+
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("newsCache", CreationCollisionOption.ReplaceExisting);
+            using (Stream fileStream = await file.OpenStreamForWriteAsync())
+            {
+                sessionData.Seek(0, SeekOrigin.Begin);
+                await sessionData.CopyToAsync(fileStream);
+                await fileStream.FlushAsync();
+            }
+        }
+        #endregion
 
         public bool LoadData()
         {
@@ -72,23 +114,23 @@ namespace Muse.Data
 
         public void LoadItem(MuseDataType type)
         {
-                switch (type)
-                {
-                    case MuseDataType.News:
-                        if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
-                            CurrentItem = Items[CurrentItemIndex];
-                        break;
-                    case MuseDataType.Tour:
-                        if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
-                            CurrentItem = TourDates[CurrentItemIndex];
-                        break;
-                    case MuseDataType.Photo:
-                        if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
-                            CurrentItem = Photos[CurrentItemIndex];
-                        break;
-                }
-                NotifyPropertyChanged("CurrentItem");
-                CurrentItem.NotifyAll();
+            switch (type)
+            {
+                case MuseDataType.News:
+                    if (CurrentItemIndex >= 0 && Items.Count > CurrentItemIndex)
+                        CurrentItem = Items[CurrentItemIndex];
+                    break;
+                case MuseDataType.Tour:
+                    if (CurrentItemIndex >= 0 && TourDates.Count > CurrentItemIndex)
+                        CurrentItem = TourDates[CurrentItemIndex];
+                    break;
+                case MuseDataType.Photo:
+                    if (CurrentItemIndex >= 0 && Photos.Count > CurrentItemIndex)
+                        CurrentItem = Photos[CurrentItemIndex];
+                    break;
+            }
+            NotifyPropertyChanged("CurrentItem");
+            CurrentItem.NotifyAll();
         }
 
         public enum MuseDataType
@@ -103,7 +145,7 @@ namespace Muse.Data
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void wc_DownloadStringCompleted_news(object sender, DownloadStringCompletedEventArgs e)
+        async void wc_DownloadStringCompleted_news(object sender, DownloadStringCompletedEventArgs e)
         {
             if (e.Error != null) return;
 
@@ -125,6 +167,10 @@ namespace Muse.Data
             {
                 var rssItem = new MuseRSSItem("No News", "", "No news have been published.", "");
                 Items.Add(rssItem);
+            }
+            else
+            {
+                await CacheNewsItems();
             }
         }
 
