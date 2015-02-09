@@ -96,7 +96,6 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BackgroundUpdater.cs" />
     <Compile Include="MuseService.cs">
       <SubType>Code</SubType>
     </Compile>

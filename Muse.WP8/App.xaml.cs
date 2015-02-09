@@ -89,8 +89,6 @@ namespace Muse.WP8
 
             //Initializes this instance.
             diagnostics.Init();
-        
-    
         }
 
         // Code to execute when the application is launching (eg, from Start)

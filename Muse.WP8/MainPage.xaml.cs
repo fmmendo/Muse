@@ -11,6 +11,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
 using Telerik.Windows.Controls;
+using Windows.ApplicationModel.Background;
+using System.Diagnostics;
+using MuseBackgroundTask;
 
 namespace Muse.WP8
 {
@@ -29,6 +32,34 @@ namespace Muse.WP8
         void MainPage_Loaded(object sender, RoutedEventArgs e)
         {
         }
+
+        private async void RegisterBackgroundTask()
+        {
+            try
+            {
+                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == "News push notification");
+                    if (!isRegistered)
+                    {
+                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
+                        {
+                            Name = "News push notification",
+                            TaskEntryPoint = typeof(NewsNotifierBackgroundTask).FullName
+                        };
+                        builder.SetTrigger(new TimeTrigger(360, false));
+                        //builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                        BackgroundTaskRegistration task = builder.Register();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("The access has already been granted");
+            }
+        }
+
 
         /// <summary>
         /// Navigates to about page.
@@ -69,6 +100,12 @@ namespace Muse.WP8
             App.MuseService.CurrentItemIndex = lb.SelectedIndex;//lb.Items.IndexOf(lb.SelectedItem);
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.Photo);
             NavigationService.Navigate(new Uri("/PhotoPage.xaml", UriKind.Relative));
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+            RegisterBackgroundTask();
         }
     }
 }

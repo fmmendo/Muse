@@ -53,32 +53,43 @@ namespace Muse.Data
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
 
-            LoadCache();
+            //LoadCache();
         }
 
+        #region Cache
         private async Task LoadCache()
         {
-            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
+            Items = await LoadCacheFileToCollecton("newsCache");
+            //TourDates = await LoadCacheFileToCollecton("tourCache");
+            //Photos = await LoadCacheFileToCollecton("imageCache");
+        }
+
+        private async Task<ObservableCollection<MuseRSSItem>> LoadCacheFileToCollecton(string filename)
+        {
+            StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync(filename);
             using (IInputStream inStream = await file.OpenSequentialReadAsync())
             {
                 DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-                Items = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
-            }
-
-            StorageFile file1 = await ApplicationData.Current.LocalFolder.GetFileAsync("tourCache");
-            using (IInputStream inStream = await file1.OpenSequentialReadAsync())
-            {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-                TourDates = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
-            }
-
-            StorageFile file2 = await ApplicationData.Current.LocalFolder.GetFileAsync("imageCache");
-            using (IInputStream inStream = await file2.OpenSequentialReadAsync())
-            {
-                DataContractSerializer serializer = new DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-                Photos = (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
+                return (ObservableCollection<MuseRSSItem>)serializer.ReadObject(inStream.AsStreamForRead());
             }
         }
+
+        private async Task CacheNewsItems()
+        {
+            MemoryStream sessionData = new MemoryStream();
+            DataContractSerializer serializer = new
+            DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
+            serializer.WriteObject(sessionData, Items);
+
+            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("newsCache", CreationCollisionOption.ReplaceExisting);
+            using (Stream fileStream = await file.OpenStreamForWriteAsync())
+            {
+                sessionData.Seek(0, SeekOrigin.Begin);
+                await sessionData.CopyToAsync(fileStream);
+                await fileStream.FlushAsync();
+            }
+        }
+        #endregion
 
         public bool LoadData()
         {
@@ -160,22 +171,6 @@ namespace Muse.Data
             else
             {
                 await CacheNewsItems();
-            }
-        }
-
-        private async Task CacheNewsItems()
-        {
-            MemoryStream sessionData = new MemoryStream();
-            DataContractSerializer serializer = new
-            DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-            serializer.WriteObject(sessionData, Items.OrderBy(i => DateTime.Parse(i.PubDate)));
-
-            StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("newsCache", CreationCollisionOption.ReplaceExisting);
-            using (Stream fileStream = await file.OpenStreamForWriteAsync())
-            {
-                sessionData.Seek(0, SeekOrigin.Begin);
-                await sessionData.CopyToAsync(fileStream);
-                await fileStream.FlushAsync();
             }
         }
 

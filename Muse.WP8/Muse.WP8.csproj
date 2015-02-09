@@ -235,6 +235,10 @@
       <Project>{A3DA51C4-C768-455F-95B1-B0D3EAB5163E}</Project>
       <Name>Muse.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MuseBackgroundTask\MuseBackgroundTask.csproj">
+      <Project>{95fe0fce-9710-44c7-8ce3-efaf76c33806}</Project>
+      <Name>MuseBackgroundTask</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />

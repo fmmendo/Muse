@@ -161,10 +161,12 @@ namespace Muse.Data.RSS
             Link = link;
             Description = description;
             PubDate = pubdate;
+
             GetTourDate();
 
             /* Prepare some muse specific data */
             Description = GetDescription(description);
+
             LoadHeavyDutyData();
         }
 
