@@ -38,9 +38,10 @@ namespace MuseBackgroundTask
                     var xmlItems = System.Xml.Linq.XElement.Parse(result);
                     foreach (var item in xmlItems.Descendants("item"))
                     {
-                        if (!text.Contains(item.Element("title").Value))
+                        var title = System.Net.WebUtility.HtmlDecode(item.Element("title").Value);
+                        if (!text.Contains(title))
                         {
-                            items.Add(item.Element("title").Value);
+                            items.Add(title);
                         }
                     }
                 }
