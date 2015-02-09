@@ -26,13 +26,13 @@ namespace Muse.WP81
 
             // Set the data context of the listbox control to the sample data
             DataContext = App.ViewModel;
-            //this.Loaded += new RoutedEventHandler(MainPage_Loaded);
+            this.Loaded += new RoutedEventHandler(MainPage_Loaded);
         }
 
-        //void MainPage_Loaded(object sender, RoutedEventArgs e)
-        //{
-
-        //}
+        void MainPage_Loaded(object sender, RoutedEventArgs e)
+        {
+            RegisterBackgroundTask();
+        }
 
         private async void RegisterBackgroundTask()
         {
@@ -49,8 +49,10 @@ namespace Muse.WP81
                             Name = "News push notification",
                             TaskEntryPoint = typeof(NewsNotifierBackgroundTask).FullName
                         };
-                        builder.SetTrigger(new TimeTrigger(15, false));
+
+                        builder.SetTrigger(new TimeTrigger(1440, false));//every 24h
                         //builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+
                         BackgroundTaskRegistration task = builder.Register();
                     }
                 }
