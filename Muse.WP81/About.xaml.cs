@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using Microsoft.Phone.Controls;
+using Microsoft.Phone.Tasks;
 
 namespace Muse.WP81
 {
@@ -18,6 +19,26 @@ namespace Muse.WP81
         public About()
         {
             InitializeComponent();
+        }
+
+        private void HyperlinkButton_Click(object sender, RoutedEventArgs e)
+        {
+            var marketplaceReviewTask = new MarketplaceReviewTask();
+
+            marketplaceReviewTask.Show();
+        }
+
+        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            EmailComposeTask emailComposeTask = new EmailComposeTask();
+
+
+            emailComposeTask.Subject = "Feedback: Muse App";
+            emailComposeTask.Body = "";
+            emailComposeTask.To = "feedback@fmendo.com ";
+
+
+            emailComposeTask.Show();
         }
     }
 }

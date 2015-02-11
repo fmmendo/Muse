@@ -11,6 +11,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Windows.ApplicationModel.Appointments;
 using Windows.Storage;
 using Windows.Storage.Streams;
 
@@ -41,6 +42,82 @@ namespace Muse.Data
 
         public MuseRSSItem CurrentItem { get; private set; }
         public int CurrentItemIndex { get; set; }
+
+        private AppointmentStore appointmentStore = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public AppointmentStore AppointmentStore
+        {
+            get
+            {
+                if (appointmentStore == null)
+                {
+                    var t = AppointmentManager.RequestStoreAsync(AppointmentStoreAccessType.AppCalendarsReadWrite).AsTask();
+                    //t.Start();
+                    t.Wait();
+                    appointmentStore = t.Result;
+
+                    if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
+                    {
+
+                        appointmentStore.ChangeTracker.Enable();
+                        appointmentStore.ChangeTracker.Reset();
+
+                        ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
+                    }
+
+                }
+
+                return appointmentStore;
+            }
+            //set { appointmentStore = value; }
+        }
+
+        public AppointmentCalendar currentAppCalendar = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public AppointmentCalendar CurrentAppCalendar
+        {
+            get
+            {
+                if (currentAppCalendar == null)
+                {
+                    IReadOnlyList<AppointmentCalendar> appCalendars = AppointmentStore.FindAppointmentCalendarsAsync(FindAppointmentCalendarsOptions.IncludeHidden).AsTask().Result;
+
+                    //AppointmentCalendar appCalendar = null;
+
+
+                    // Apps can create multiple calendars. This example creates only one.
+                    if (appCalendars.Count == 0)
+                    {
+                        currentAppCalendar = AppointmentStore.CreateAppointmentCalendarAsync("Muse Tour Calendar").AsTask().Result;
+
+                    }
+                    else
+                    {
+                        currentAppCalendar = appCalendars[0];
+                    }
+
+
+                    currentAppCalendar.OtherAppReadAccess = AppointmentCalendarOtherAppReadAccess.Full;
+                    currentAppCalendar.OtherAppWriteAccess = AppointmentCalendarOtherAppWriteAccess.SystemOnly;
+
+                    // This app will show the details for the appointment. Use System to let the system show the details.
+                    currentAppCalendar.SummaryCardView = AppointmentSummaryCardView.App;
+
+                    var save = currentAppCalendar.SaveAsync().AsTask();
+                    //save.Start();
+                    save.Wait();
+
+                    //currentAppCalendar = appCalendar;
+                }
+
+                return currentAppCalendar;
+            }
+        }
+
         /// <summary>
         /// 
         /// </summary>
@@ -53,16 +130,20 @@ namespace Muse.Data
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
 
+            //var s = AppointmentStore;
+            //var ss = appointmentStore.ToString();
+            //var c = CurrentAppCalendar;
+            //var cc = CurrentAppCalendar.ToString();
             //LoadCache();
         }
 
         #region Cache
-        private async Task LoadCache()
-        {
-            Items = await LoadCacheFileToCollecton("newsCache");
-            //TourDates = await LoadCacheFileToCollecton("tourCache");
-            //Photos = await LoadCacheFileToCollecton("imageCache");
-        }
+        //private async Task LoadCache()
+        //{
+        //    Items = await LoadCacheFileToCollecton("newsCache");
+        //    //TourDates = await LoadCacheFileToCollecton("tourCache");
+        //    //Photos = await LoadCacheFileToCollecton("imageCache");
+        //}
 
         private async Task<ObservableCollection<MuseRSSItem>> LoadCacheFileToCollecton(string filename)
         {
@@ -259,5 +340,25 @@ namespace Muse.Data
             }
         }
         #endregion
+
+        public async Task<bool> AddToCalendar()
+        {
+            try
+            {
+                Appointment newAppointment = new Appointment();
+
+                newAppointment.Subject = "MUSE: " + CurrentItem.Title;
+                newAppointment.StartTime = CurrentItem.TourDate;
+                newAppointment.AllDay = true;
+                //newAppointment.Location = "here!";
+                //newAppointment.RoamingId = "984756";
+
+                //save appointment to calendar
+                await CurrentAppCalendar.SaveAppointmentAsync(newAppointment);
+
+                return true;
+            }
+            catch (Exception) { return false; }
+        }
     }
 }

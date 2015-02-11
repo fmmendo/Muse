@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="APP TITLE" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="MUSE" Style="{StaticResource PhoneTextNormalStyle}"/>
             <TextBlock x:Name="PageTitle" Text="about" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
@@ -36,19 +36,19 @@
             
             <StackPanel>
                 <TextBlock 
-                    Text="Application Name" 
+                    Text="Muse" 
                     Margin="12,0,12,0" 
                     FontSize="{StaticResource PhoneFontSizeLarge}" 
                     FontFamily="{StaticResource PhoneFontFamilySemiBold}"/>
                 <TextBlock 
-                    Text="Version number" 
+                    Text="v. 1.4.0" 
                     Margin="12,0,12,0" 
                     FontSize="{StaticResource PhoneFontSizeNormal}"/>
             </StackPanel>
             
             <TextBlock 
                 Grid.Row="1" 
-                Text="App description, about information in few sentences"
+                Text="Keep ut-to-date with anything Muse! This app displays the most recent news, forthcoming gigs, and photos. Feel free to suggest more features!"
                 Margin="12,24,12,24" 
                 TextWrapping="Wrap" 
                 Foreground="{StaticResource PhoneSubtleBrush}" 
@@ -59,27 +59,27 @@
                 Margin="0,12,0,0" 
                 HorizontalAlignment="Left" 
                 Foreground="{StaticResource PhoneAccentBrush}" 
-                FontSize="{StaticResource PhoneFontSizeNormal}" 
-                Command="{Binding SendAnEmailCommand}"/>
+                FontSize="{StaticResource PhoneFontSizeNormal}"
+                Click="HyperlinkButton_Click_1"/>
             <HyperlinkButton 
                 Grid.Row="3"
                 Content="rate this app" 
                 Margin="0,12,0,0" 
                 HorizontalAlignment="Left" 
                 Foreground="{StaticResource PhoneAccentBrush}" 
-                FontSize="{StaticResource PhoneFontSizeNormal}" 
-                Command="{Binding RateThisAppCommand}"/>
+                FontSize="{StaticResource PhoneFontSizeNormal}"
+                Click="HyperlinkButton_Click"/>
             <StackPanel Grid.Row="4" Margin="12,0,12,50" VerticalAlignment="Bottom">
-                <Image 
+                <!--<Image 
                     Source="Images/CompanyLogo.png" 
                     Stretch="None" 
-                    HorizontalAlignment="Left" />
+                    HorizontalAlignment="Left" />-->
                 <TextBlock 
                     Text="Copyright" 
                     Margin="0,12,0,0" 
                     FontSize="{StaticResource PhoneFontSizeNormal}"/>
                 <TextBlock 
-                    Text="Company name" 
+                    Text="fmendo" 
                     FontSize="{StaticResource PhoneFontSizeNormal}"/>
             </StackPanel>
         </Grid>

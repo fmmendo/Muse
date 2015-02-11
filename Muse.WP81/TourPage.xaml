@@ -53,8 +53,9 @@
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
-            <shell:ApplicationBarIconButton IconUri="Assets\appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" ></shell:ApplicationBarIconButton>
-            <shell:ApplicationBarIconButton IconUri="Assets\appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="Assets\appbar.back.rest.png" IsEnabled="True" Text="Previous" Click="Back_Click" />
+            <shell:ApplicationBarIconButton  IconUri="Assets\appbar.calendar.png" IsEnabled="True" Text="Add" Click="AddToCalendar_Click" />
+            <shell:ApplicationBarIconButton IconUri="Assets\appbar.next.rest.png" IsEnabled="True" Text="Next" Click="Next_Click"/>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 
