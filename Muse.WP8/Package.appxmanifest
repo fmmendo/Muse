@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="74c23752-f72c-4cf8-942f-ec7261ad87d2" Publisher="CN=Filipe" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="fd94e89b-b47a-45ba-a590-e56cfdd13d32" PhonePublisherId="db2afe8f-e5aa-4bf4-bb35-91f79434e70a" />
+  <Identity Name="27ad6932-ac55-425b-9f27-1c580a9d84bb" Publisher="CN=Filipe" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="29504930-329b-4da6-be47-f4e24a5d6ef2" PhonePublisherId="2b3ebbff-e94a-4af9-bafa-5b972a919a31" />
   <Properties>
-    <DisplayName>Muse.WP81</DisplayName>
+    <DisplayName>Muse.WP8</DisplayName>
     <PublisherDisplayName>Filipe</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -15,11 +15,11 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
-      <m3:VisualElements DisplayName="Muse.WP81" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="Muse.WP81" ForegroundText="light" BackgroundColor="#464646" ToastCapable="true">
+    <Application Id="x29504930y329by4da6ybe47yf4e24a5d6ef2x" Executable="AGHost.exe" EntryPoint="MainPage.xaml">
+      <m3:VisualElements DisplayName="Muse.WP8" Square150x150Logo="Assets\SquareTile150x150.png" Square44x44Logo="Assets\Logo.png" Description="Muse.WP8" ForegroundText="light" BackgroundColor="#464646">
         <m3:DefaultTile Square71x71Logo="Assets\SquareTile71x71.png">
         </m3:DefaultTile>
-        <m3:SplashScreen Image="Assets\SplashScreen.png" />
+        <m3:SplashScreen Image="Assets\Splashscreen.png" />
       </m3:VisualElements>
       <Extensions>
         <Extension Category="windows.backgroundTasks" EntryPoint="AgHost.BackgroundTask">
@@ -27,19 +27,12 @@
             <Task Type="systemEvent" />
           </BackgroundTasks>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="MuseBackgroundTask.NewsNotifierBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
-            <Task Type="timer" />
-            <Task Type="pushNotification" />
-            <m2:Task Type="location" />
-            <m2:Task Type="deviceUse" />
-            <m3:Task Type="chatMessageNotification" />
-          </BackgroundTasks>
-        </Extension>
       </Extensions>
     </Application>
   </Applications>
+  <Capabilities>
+    <m3:Capability Name="appointments" />
+  </Capabilities>
   <Extensions>
     <Extension Category="windows.activatableClass.inProcessServer">
       <InProcessServer>
@@ -48,8 +41,4 @@
       </InProcessServer>
     </Extension>
   </Extensions>
-  <Capabilities>
-    <Capability Name="internetClientServer" />
-    <m3:Capability Name="appointments" />
-  </Capabilities>
 </Package>

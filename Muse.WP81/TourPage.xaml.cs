@@ -32,5 +32,13 @@ namespace Muse.WP81
             App.MuseService.LoadItem(Data.MuseService.MuseDataType.Tour);
             radSlideView.MoveToNextItem(true);
         }
+
+        private async void AddToCalendar_Click(object sender, EventArgs e)
+        {
+            if (await App.MuseService.AddToCalendar())
+                MessageBox.Show("This tour date was added to your calendar.");
+            else
+                MessageBox.Show("Couldn't add date to calendar.");
+        }
     }
 }

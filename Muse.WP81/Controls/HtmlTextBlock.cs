@@ -539,6 +539,9 @@ namespace Krempel.WP7.Core.Controls
             {
                 try
                 {
+                    if (!node.Attributes["src"].Value.StartsWith("http://"))
+                        return;
+
                     BitmapImage bitmap = new BitmapImage(new Uri(node.Attributes["src"].Value));
                     bitmap.CreateOptions = BitmapCreateOptions.None;
                     bitmap.ImageOpened += delegate

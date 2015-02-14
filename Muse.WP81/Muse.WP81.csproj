@@ -141,6 +141,7 @@
   <ItemGroup>
     <Content Include="Assets\AlignmentGrid.png" />
     <Content Include="Assets\appbar.back.rest.png" />
+    <Content Include="Assets\appbar.calendar.png" />
     <Content Include="Assets\appbar.next.rest.png" />
     <Content Include="Assets\ApplicationIcon.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
