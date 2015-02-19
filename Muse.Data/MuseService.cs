@@ -130,10 +130,6 @@ namespace Muse.Data
             Photos = new ObservableCollection<MuseRSSItem>();
             TourDates = new ObservableCollection<MuseRSSItem>();
 
-            //var s = AppointmentStore;
-            //var ss = appointmentStore.ToString();
-            //var c = CurrentAppCalendar;
-            //var cc = CurrentAppCalendar.ToString();
             //LoadCache();
         }
 
@@ -159,8 +155,8 @@ namespace Muse.Data
         {
             MemoryStream sessionData = new MemoryStream();
             DataContractSerializer serializer = new
-            DataContractSerializer(typeof(ObservableCollection<MuseRSSItem>));
-            serializer.WriteObject(sessionData, Items);
+            DataContractSerializer(typeof(IEnumerable<String>));
+            serializer.WriteObject(sessionData, Items.Select(i => i.Title));
 
             StorageFile file = await ApplicationData.Current.LocalFolder.CreateFileAsync("newsCache", CreationCollisionOption.ReplaceExisting);
             using (Stream fileStream = await file.OpenStreamForWriteAsync())

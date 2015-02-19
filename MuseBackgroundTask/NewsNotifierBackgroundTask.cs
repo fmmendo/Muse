@@ -19,46 +19,53 @@ namespace MuseBackgroundTask
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             BackgroundTaskDeferral _deferral = taskInstance.GetDeferral();
-
-            if (CanSendToasts())
+            try
             {
-                var file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
-                var text = await FileIO.ReadTextAsync(file);
-
-                var items = new List<string>();
-
-                using (HttpClient client = new HttpClient())
-                using (HttpResponseMessage response = await client.GetAsync(NEWSRSS))
-                using (HttpContent content = response.Content)
+                if (CanSendToasts())
                 {
-                    string result = await content.ReadAsStringAsync();
+                    var file = await ApplicationData.Current.LocalFolder.GetFileAsync("newsCache");
+                    var text = System.Net.WebUtility.HtmlDecode(await FileIO.ReadTextAsync(file));
 
-                    if (result == null) return;
+                    var items = new List<string>();
 
-                    var xmlItems = System.Xml.Linq.XElement.Parse(result);
-                    foreach (var item in xmlItems.Descendants("item"))
+                    using (HttpClient client = new HttpClient())
+                    using (HttpResponseMessage response = await client.GetAsync(NEWSRSS))
+                    using (HttpContent content = response.Content)
                     {
-                        var title = System.Net.WebUtility.HtmlDecode(item.Element("title").Value);
-                        if (!text.Contains(title))
+                        string result = await content.ReadAsStringAsync();
+
+                        if (result == null) return;
+                        
+                        var xmlItems = System.Xml.Linq.XElement.Parse(result);
+                        foreach (var item in xmlItems.Descendants("item"))
                         {
-                            items.Add(title);
+                            var title = System.Net.WebUtility.HtmlDecode(item.Element("title").Value);
+                            //if (!oldItems.Any(i => i == title))
+                            if (!text.Contains(title))
+                            {
+                                items.Add(title);
+                            }
                         }
                     }
+
+                    if (items.Count == 0)
+                        return;
+
+                    ToastNotification toast = null;
+                    if (items.Count == 1)
+                        toast = CreateTextOnlyToast("News", String.Format(items[0]));
+                    if (items.Count > 1)
+                        toast = CreateTextOnlyToast("News", String.Format("You have {0} unread news items", items.Count));
+
+                    toast.ExpirationTime = DateTimeOffset.UtcNow.AddDays(1);
+
+                    // Display the toast.
+                    ToastNotificationManager.CreateToastNotifier().Show(toast);
                 }
-
-                if (items.Count == 0)
-                    return;
-
-                ToastNotification toast = null;
-                if (items.Count == 1)
-                    toast = CreateTextOnlyToast("News", String.Format(items[0]));
-                if (items.Count > 1)
-                    toast = CreateTextOnlyToast("News", String.Format("You have {0} unread news items", items.Count));
-
-                toast.ExpirationTime = DateTimeOffset.UtcNow.AddDays(1);
-
-                // Display the toast.
-                ToastNotificationManager.CreateToastNotifier().Show(toast);
+            }
+            catch (Exception)
+            {
+                //fmmd: until I figure out the culprit...
             }
 
             _deferral.Complete();
