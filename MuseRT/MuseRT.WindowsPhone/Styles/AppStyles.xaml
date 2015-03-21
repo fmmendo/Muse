@@ -1,0 +1,65 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MuseRT.Styles">
+    
+    <!-- Colors -->
+    <SolidColorBrush x:Key="AppForegroundColor" Color="#ffffff" />
+    <SolidColorBrush x:Key="AppBackgroundColor" Color="#000000" />
+    
+    <!-- Images -->
+    <BitmapImage x:Key="AppLogoImage" UriSource="/Assets/ApplicationLogo.png"/>
+    <BitmapImage x:Key="AppBackgroundImage" UriSource="/"/>
+    
+    <!-- App Background -->
+    <SolidColorBrush x:Key="AppBackground" Color="#000000" />
+    <!--<SolidColorBrush x:Key="AppBackgroundPopup" Color="#000000" Opacity=".50"/>-->
+
+    <!-- Page Header -->
+    <DataTemplate x:Key="PageHeaderMargin">
+        <!-- Back button and page title -->
+        <Grid Margin="0,24,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Image Margin="0" Source="{StaticResource AppLogoImage}" Width="70" Height="70" VerticalAlignment="Center" />
+            <TextBlock Grid.Column="1" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="false" 
+                       Text="{StaticResource AppTitle}" FontSize="48" TextWrapping="NoWrap"
+                       Foreground="{StaticResource AppForegroundColor}"/>
+        </Grid>
+    </DataTemplate>
+    
+    <!-- Hub Header -->
+    <DataTemplate x:Key="HubHeader">
+        <Grid>
+            <TextBlock Text="{Binding}" Style="{StaticResource SubHeaderText}" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- Text Styles -->
+    <Style x:Key="BaseItemText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+        <Setter Property="Typography.StylisticSet20" Value="True"/>
+        <Setter Property="Typography.DiscretionaryLigatures" Value="True"/>
+        <Setter Property="Typography.CaseSensitiveForms" Value="True"/>
+        <Setter Property="LineHeight" Value="20"/>
+        <Setter Property="LineStackingStrategy" Value="BlockLineHeight"/>
+        <Setter Property="TextLineBounds" Value="TrimToBaseline"/>
+        <Setter Property="OpticalMarginAlignment" Value="TrimSideBearings"/>
+    </Style>
+    
+    <Style x:Key="SubHeaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="FontSize" Value="28"/>
+        <Setter Property="LineHeight" Value="32"/>
+        <Setter Property="FontWeight" Value="Light"/>
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="TextTrimming" Value="WordEllipsis" />
+        <Setter Property="MaxHeight" Value="110"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+    </Style>
+    
+</ResourceDictionary>

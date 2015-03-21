@@ -3,4 +3,14 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MuseRT">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/AppStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <x:String x:Key="AppName">muse</x:String>
+            <x:String x:Key="AppTitle">muse</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
 </Application>
