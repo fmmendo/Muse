@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
@@ -82,7 +79,7 @@ namespace MuseRT.Data.Tiles
                 }
                 catch (Exception ex)
                 {
-                    AppLogs.WriteError("TileServices.SetTileImages", ex);
+                    Logger.WriteError("TileServices.SetTileImages", ex);
                 }
             }
         }
@@ -102,7 +99,7 @@ namespace MuseRT.Data.Tiles
                 }
                 catch (Exception ex)
                 {
-                    AppLogs.WriteError("TileServices.SetTileTexts", ex);
+                    Logger.WriteError("TileServices.SetTileTexts", ex);
                 }
             }
         }

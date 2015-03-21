@@ -1,6 +1,5 @@
-﻿using System;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
-using System.Collections.ObjectModel;
 using System.Xml.Linq;
 
 namespace MuseRT.Data
@@ -53,7 +52,7 @@ namespace MuseRT.Data
             if (string.IsNullOrEmpty(description))
                 description = item.GetSafeElementString("content");
 
-            rssItem.Summary = Utility.DecodeHtml(description).Trim().Truncate(500, true);
+            rssItem.Summary = System.Net.WebUtility.HtmlDecode(description).Trim().Truncate(500, true);
             rssItem.Summary = RssHelper.SanitizeString(rssItem.Summary);
             rssItem.Content = RssHelper.SanitizeString(description);
 

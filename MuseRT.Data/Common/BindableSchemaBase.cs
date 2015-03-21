@@ -5,14 +5,13 @@ namespace MuseRT.Data
 {
     public abstract class BindableSchemaBase : BindableBase
     {
-        protected BindableSchemaBase();
-
         public abstract string DefaultContent { get; }
         public abstract string DefaultImageUrl { get; }
         public abstract string DefaultSummary { get; }
         public abstract string DefaultTitle { get; }
 
         public abstract string GetValue(string propertyName);
+
         public virtual string GetValues(params string[] propertyNames)
         {
             StringBuilder sb = new StringBuilder();

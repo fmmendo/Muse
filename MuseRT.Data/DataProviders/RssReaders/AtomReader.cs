@@ -39,7 +39,7 @@ namespace MuseRT.Data
             RssSchema rssItem = new RssSchema
             {
                 Title = item.GetSafeElementString("title").Trim(),
-                Summary = RssHelper.SanitizeString(Utility.DecodeHtml(GetItemSummary(item)).Trim().Truncate(500, true)),
+                Summary = RssHelper.SanitizeString(System.Net.WebUtility.HtmlDecode(GetItemSummary(item)).Trim().Truncate(500, true)),
                 Content = GetItemSummary(item),
                 ImageUrl = GetItemImage(item),
                 PublishDate = item.GetSafeElementDate("published"),
