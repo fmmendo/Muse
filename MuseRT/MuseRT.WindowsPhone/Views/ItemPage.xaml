@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MuseRT.ItemPage"
+    x:Class="MuseRT.Views.ItemPage"
     DataContext="{Binding DefaultViewModel.Item, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Groups[0].Items[0], Source={d:DesignData Source=../MuseRT.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

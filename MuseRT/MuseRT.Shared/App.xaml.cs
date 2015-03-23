@@ -22,6 +22,7 @@ using Windows.UI.ApplicationSettings;
 #endif
 #if WINDOWS_PHONE_APP
 using Windows.Phone.UI.Input;
+using MuseRT.Views;
 #endif
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955

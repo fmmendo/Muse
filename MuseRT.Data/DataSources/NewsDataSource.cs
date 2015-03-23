@@ -8,7 +8,7 @@ namespace MuseRT.Data.DataSources
 {
     public class NewsDataSource : DataSourceBase<RssSchema>
     {
-        private const string _url = @"http://feeds2.feedburner.com/MarksDailyApple/";
+        private const string _url = @"http://muse.mu/rss/news";
 
         protected override string CacheKey
         {

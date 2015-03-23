@@ -7,6 +7,9 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/AppStyles.xaml"/>
+                
+                <!-- Application DataTemplate imports -->
+                <ResourceDictionary Source="Views/DataTemplates/NewsViews.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
             <x:String x:Key="AppName">muse</x:String>
