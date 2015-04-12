@@ -21,6 +21,10 @@
             <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="news" DataContext="{Binding MainViewModel.NewsModel}" 
                   d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:NewsViewModel, IsDesignTimeCreatable=true}"
                   ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+            <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="tour" DataContext="{Binding MainViewModel.TourModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
         </Hub>
     </Grid>
+
 </Page>

@@ -12,7 +12,6 @@ namespace MuseRT.ViewModels
 {
     public class MainViewModel : BindableBase
     {
-        private NewsViewModel _newsModel;
 
         private ViewModelBase _selectedItem = null;
 
@@ -21,14 +20,22 @@ namespace MuseRT.ViewModels
             _selectedItem = NewsModel;
         }
 
+        private NewsViewModel _newsModel;
         public NewsViewModel NewsModel
         {
             get { return _newsModel ?? (_newsModel = new NewsViewModel()); }
         }
 
+        private TourViewModel _tourModel;
+        public TourViewModel TourModel
+        {
+            get { return _tourModel ?? (_tourModel = new TourViewModel()); }
+        }
+
         public void SetViewType(ViewTypes viewType)
         {
             NewsModel.ViewType = viewType;
+            TourModel.ViewType = viewType;
         }
         public ViewModelBase SelectedItem
         {
@@ -67,7 +74,8 @@ namespace MuseRT.ViewModels
         {
             var loadTasks = new Task[]
             { 
-                NewsModel.LoadItemsAsync(forceRefresh)
+                NewsModel.LoadItemsAsync(forceRefresh),
+                TourModel.LoadItemsAsync(forceRefresh)
             };
             await Task.WhenAll(loadTasks);
         }

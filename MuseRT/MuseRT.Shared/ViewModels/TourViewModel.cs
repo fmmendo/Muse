@@ -4,15 +4,13 @@ using MuseRT.Data.Common;
 using MuseRT.Data.DataSources;
 using MuseRT.Services;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace MuseRT.ViewModels
 {
-    public class NewsViewModel : ViewModelBase<RssSchema>
+    public class TourViewModel : ViewModelBase<RssSchema>
     {
         private RelayCommandEx<RssSchema> itemClickCommand;
         public RelayCommandEx<RssSchema> ItemClickCommand
@@ -24,7 +22,7 @@ namespace MuseRT.ViewModels
                     itemClickCommand = new RelayCommandEx<RssSchema>(
                         (item) =>
                         {
-                            NavigationServices.NavigateToPage("NewsDetailPage", item);
+                            NavigationServices.NavigateToPage("TourDetailPage", item);
                         });
                 }
 
@@ -72,7 +70,7 @@ namespace MuseRT.ViewModels
 
         override protected DataSourceBase<RssSchema> CreateDataSource()
         {
-            return new NewsDataSource(); // RssDataSource
+            return new TourDataSource(); // RssDataSource
         }
 
         override public Visibility TextToSpeechVisibility
@@ -92,7 +90,7 @@ namespace MuseRT.ViewModels
 
         override protected void PinToStart()
         {
-            base.PinToStart("NewsDetailPage", "{Title}", "{Summary}", "{ImageUrl}");
+            base.PinToStart("TourDetailPage", "{Title}", "{Summary}", "{ImageUrl}");
         }
 
         override public Visibility ShareItemVisibility
@@ -133,12 +131,12 @@ namespace MuseRT.ViewModels
 
         override public void NavigateToSectionList()
         {
-            NavigationServices.NavigateToPage("NewsList");
+            NavigationServices.NavigateToPage("TourList");
         }
 
         override protected void NavigateToSelectedItem()
         {
-            NavigationServices.NavigateToPage("NewsDetailPage");
+            NavigationServices.NavigateToPage("TourDetailPage");
         }
     }
 }

@@ -41,6 +41,7 @@
     <Compile Include="Common\BindableBase.cs" />
     <Compile Include="Common\BindableSchemaBase.cs" />
     <Compile Include="Common\ISyncItem.cs" />
+    <Compile Include="Common\LocalSettingsNames.cs" />
     <Compile Include="Common\ObservableCollectionExtensions.cs" />
     <Compile Include="Common\RssHelper.cs" />
     <Compile Include="Common\Utility.cs" />

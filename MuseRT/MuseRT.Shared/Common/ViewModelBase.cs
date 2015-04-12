@@ -1,4 +1,5 @@
 ﻿using MuseRT.Data;
+using MuseRT.Data.Common;
 using MuseRT.Services;
 using System;
 using System.Collections.ObjectModel;
@@ -68,6 +69,18 @@ namespace MuseRT.Common
         virtual public Visibility RefreshVisibility
         {
             get { return Visibility.Collapsed; }
+        }
+
+        protected string DeviceType
+        {
+            get
+            {
+#if WINDOWS_PHONE_APP
+                return LocalSettingNames.PhoneValue;
+#else
+                return LocalSettingNames.WindowsValue;
+#endif
+            }
         }
 
         virtual public void NavigateToSectionList() { }
