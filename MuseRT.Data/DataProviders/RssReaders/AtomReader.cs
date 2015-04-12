@@ -39,6 +39,7 @@ namespace MuseRT.Data
         {
             RssSchema rssItem = new RssSchema
             {
+                Author = GetItemAuthor(item),
                 Title = item.GetSafeElementString("title").Trim(),
                 Summary = RssHelper.SanitizeString(System.Net.WebUtility.HtmlDecode(GetItemSummary(item)).Trim().Truncate(500, true)),
                 Content = GetItemSummary(item),
@@ -58,6 +59,23 @@ namespace MuseRT.Data
             }
             rssItem.Id = id;
             return rssItem;
+        }
+
+        private static string GetItemAuthor(XElement item)
+        {
+            var content = string.Empty;
+
+            if (item != null && !string.IsNullOrEmpty(item.Element(item.GetDefaultNamespace() + "author").Value))
+            {
+                content = item.Element(item.GetDefaultNamespace() + "author").GetSafeElementString("name");
+            }
+
+            if (string.IsNullOrEmpty(content))
+            {
+                content = item.GetSafeElementString("author");
+            }
+
+            return content;
         }
 
         private static string GetItemImage(XElement item)

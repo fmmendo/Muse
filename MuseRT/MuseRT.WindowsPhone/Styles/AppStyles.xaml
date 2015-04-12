@@ -36,7 +36,13 @@
             <TextBlock Text="{Binding}" Style="{StaticResource SubHeaderText}" />
         </Grid>
     </DataTemplate>
-
+    
+    <!-- Html2Xaml  -->
+    <Style x:Key="Html2XamlStyle" TargetType="RichTextBlock">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="FontSize"  Value="19" />
+    </Style>
+    
     <!-- Text Styles -->
     <Style x:Key="BaseItemText" TargetType="TextBlock">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
@@ -56,6 +62,12 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="FontWeight" Value="Medium"/>
         <Setter Property="TextTrimming" Value="WordEllipsis" />
+    </Style>
+
+    <Style x:Key="ItemHeaderWrapText" TargetType="TextBlock" BasedOn="{StaticResource ItemHeaderText}">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="LineHeight" Value="22"/>
+        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="SubHeaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">

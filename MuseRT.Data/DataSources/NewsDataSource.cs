@@ -25,7 +25,8 @@ namespace MuseRT.Data.DataSources
             try
             {
                 var rssDataProvider = new RssDataProvider(_url);
-                return await rssDataProvider.Load();
+                var items = await rssDataProvider.Load();
+                return await rssDataProvider.LoadAdditionalMuseData(items);
             }
             catch (Exception ex)
             {

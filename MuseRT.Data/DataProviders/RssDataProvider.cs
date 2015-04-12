@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Compression;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -89,6 +90,75 @@ namespace MuseRT.Data
             {
                 return reader.ReadToEnd();
             }
+        }
+
+        public async Task<ObservableCollection<RssSchema>> LoadAdditionalMuseData(ObservableCollection<RssSchema> items)
+        {
+            foreach (var item in items)
+            {
+                int start = -1, end = -1;
+                start = item.FeedUrl.IndexOf("_") + 1;
+                end = item.FeedUrl.IndexOf(".htm");
+                string html = string.Empty;
+                if (start > 0 && end > 0 && end > start)
+                {
+                    var id = item.FeedUrl.Substring(start, end - (start));
+                }
+
+                if (!String.IsNullOrEmpty(item.FeedUrl) && !item.FeedUrl.StartsWith("http://muse.mu/tour-dates") && !item.FeedUrl.StartsWith("http://muse.mu/images"))
+                {
+                    var req = (HttpWebRequest)WebRequest.Create(item.FeedUrl);
+                    var res = await req.GetResponseAsync();
+
+                    using (var sr = new StreamReader(res.GetResponseStream()))
+                    {
+                        html = sr.ReadToEnd();
+                    }
+
+                    if (String.IsNullOrEmpty(html))
+                    {
+                        continue;
+                    }
+
+                    int index = -1;
+                    start = -1;
+                    end = -1;
+
+                    if (string.IsNullOrEmpty(html)) continue;
+
+                    index = html.IndexOf("og:image");
+                    if (index > 0)
+                    {
+                        start = html.Substring(index).IndexOf("content=") + 8;
+                        end = html.Substring(index).IndexOf("\" />");
+                        string url = html.Substring(index + start + 1, end - (start + 1));
+                        if (url.Contains("thumb"))
+                            url = url.Replace("thumb", "original");
+                        else if (url.Contains("square"))
+                            url = url.Replace("square", "original");
+
+                        item.ImageUrl = url;
+                        item.ExtraImageUrl = item.ImageUrl.Replace("original", "thumb");
+
+                        index = end = start = -1;
+                    }
+
+                    index = html.IndexOf("<div class=\"newsBody\">");
+                    if (index > 0)
+                    {
+                        start = index + 22;
+                        end = html.Substring(index + 22).IndexOf("</div>");
+                        string desc = html.Substring(start, end);
+
+                        item.Content = RssHelper.SanitizeString(desc);
+
+                        index = end = start = -1;
+                    }
+                    html = null;
+                }
+            }
+
+            return items;
         }
     }
 }

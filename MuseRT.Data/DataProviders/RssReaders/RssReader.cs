@@ -14,8 +14,8 @@ namespace MuseRT.Data
     /// </summary>
     internal class RssReader : BaseRssReader
     {
-        private readonly XNamespace NsRdfNamespaceUri = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
-        private readonly XNamespace NsRdfElementsNamespaceUri = "http://purl.org/dc/elements/1.1/";
+        private static readonly XNamespace NsRdfNamespaceUri = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+        private static readonly XNamespace NsRdfElementsNamespaceUri = "http://purl.org/dc/elements/1.1/";
 
         /// <summary>
         /// This override load and parses the document and return a list of RssSchema values.
@@ -52,6 +52,8 @@ namespace MuseRT.Data
             var rssItem = new RssSchema();
             rssItem.Title = item.GetSafeElementString("title").Trim();
             rssItem.FeedUrl = item.GetSafeElementString("link");
+
+            rssItem.Author = GetItemAuthor(item);
 
             string description = item.GetSafeElementString("description");
             if (string.IsNullOrEmpty(description))
@@ -141,76 +143,18 @@ namespace MuseRT.Data
 
             rssItem.ImageUrl = image;
 
-            rssItem = GetImageAndNewsBody(rssItem).Result;
-
             return rssItem;
         }
 
-        private static async Task<RssSchema> GetImageAndNewsBody(RssSchema item)
+        private static string GetItemAuthor(XElement item)
         {
-            int start = -1, end = -1;
-            start = item.FeedUrl.IndexOf("_") + 1;
-            end = item.FeedUrl.IndexOf(".htm");
-            string html = string.Empty;
-            if (start > 0 && end > 0 && end > start)
+            var content = item.GetSafeElementString("creator", NsRdfElementsNamespaceUri).Trim();
+            if (string.IsNullOrEmpty(content))
             {
-                var id = item.FeedUrl.Substring(start, end - (start));
+                content = item.GetSafeElementString("author");
             }
 
-            if (!String.IsNullOrEmpty(item.FeedUrl) && !item.FeedUrl.StartsWith("http://muse.mu/tour-dates") && !item.FeedUrl.StartsWith("http://muse.mu/images"))
-            {
-                var req = (HttpWebRequest)WebRequest.Create(item.FeedUrl);
-                var res = await req.GetResponseAsync();
-
-                using (var sr = new StreamReader(res.GetResponseStream()))
-                {
-                    html = sr.ReadToEnd();
-                }
-
-                if (String.IsNullOrEmpty(html))
-                {
-                    return item;
-                }
-
-                int index = -1;
-                start = -1;
-                end = -1;
-
-                if (string.IsNullOrEmpty(html)) return item;
-
-                index = html.IndexOf("og:image");
-                if (index > 0)
-                {
-                    start = html.Substring(index).IndexOf("content=") + 8;
-                    end = html.Substring(index).IndexOf("\" />");
-                    string url = html.Substring(index + start + 1, end - (start + 1));
-                    if (url.Contains("thumb"))
-                        url = url.Replace("thumb", "original");
-                    else if (url.Contains("square"))
-                        url = url.Replace("square", "original");
-
-                    item.ImageUrl = url;
-                    item.ExtraImageUrl = item.ImageUrl.Replace("original", "thumb");
-
-                    index = end = start = -1;
-                }
-
-                index = html.IndexOf("<div class=\"newsBody\">");
-                if (index > 0)
-                {
-                    start = index + 22;
-                    end = html.Substring(index + 22).IndexOf("</div>");
-                    string desc = html.Substring(start, end);
-
-                    item.Content = RssHelper.SanitizeString(desc);
-                    //NewsBody = GetDescription(_newsBody);
-
-                    index = end = start = -1;
-                }
-                html = null;
-            }
-
-            return item;
+            return content;
         }
     }
 }
