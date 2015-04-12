@@ -1,8 +1,11 @@
-﻿using System;
+﻿using MuseRT.Common;
+using MuseRT.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,18 +25,54 @@ namespace MuseRT.Views
     /// </summary>
     public sealed partial class NewsDetailPage : Page
     {
+        private NavigationHelper _navigationHelper;
+
+        private DataTransferManager _dataTransferManager;
+
         public NewsDetailPage()
         {
             this.InitializeComponent();
+            _navigationHelper = new NavigationHelper(this);
+
+            NewsModel = new NewsViewModel();
         }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        public NewsViewModel NewsModel { get; private set; }
+
+        public NavigationHelper NavigationHelper
         {
+            get { return _navigationHelper; }
+        }
+
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _dataTransferManager = DataTransferManager.GetForCurrentView();
+            _dataTransferManager.DataRequested += OnDataRequested;
+
+            _navigationHelper.OnNavigatedTo(e);
+
+            if (NewsModel != null)
+            {
+                await NewsModel.LoadItemsAsync();
+                NewsModel.SelectItem(e.Parameter);
+
+                NewsModel.ViewType = ViewTypes.Detail;
+            }
+            DataContext = this;
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _navigationHelper.OnNavigatedFrom(e);
+            _dataTransferManager.DataRequested -= OnDataRequested;
+        }
+
+        private void OnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            if (NewsModel != null)
+            {
+                NewsModel.GetShareContent(args.Request);
+            }
         }
     }
 }

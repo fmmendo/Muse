@@ -2,6 +2,7 @@
     x:Class="MuseRT.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:MuseRT.Converters"
     xmlns:local="using:MuseRT">
     <Application.Resources>
         <ResourceDictionary>
@@ -14,6 +15,9 @@
 
             <x:String x:Key="AppName">muse</x:String>
             <x:String x:Key="AppTitle">muse</x:String>
+            
+            <!-- Converters -->
+            <converters:TextPlainConverter x:Key="TextPlainConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

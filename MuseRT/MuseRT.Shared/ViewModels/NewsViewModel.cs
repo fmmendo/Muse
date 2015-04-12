@@ -22,7 +22,7 @@ namespace MuseRT.ViewModels
                     itemClickCommand = new RelayCommandEx<RssSchema>(
                         (item) =>
                         {
-                            NavigationServices.NavigateToPage("NewsDetail", item);
+                            NavigationServices.NavigateToPage("NewsDetailPage", item);
                         });
                 }
 
@@ -43,7 +43,7 @@ namespace MuseRT.ViewModels
 
         override protected void PinToStart()
         {
-            base.PinToStart("NewsDetail", "{Title}", "{Summary}", "{ImageUrl}");
+            base.PinToStart("NewsDetailPage", "{Title}", "{Summary}", "{ImageUrl}");
         }
 
         override public Visibility ShareItemVisibility
@@ -89,7 +89,7 @@ namespace MuseRT.ViewModels
 
         override protected void NavigateToSelectedItem()
         {
-            NavigationServices.NavigateToPage("NewsDetail");
+            NavigationServices.NavigateToPage("NewsDetailPage");
         }
     }
 }
