@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TourViewModel.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\TourDataSource.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Data\NewsDataSource.xml" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />

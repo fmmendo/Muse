@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/AppStyles.xaml"/>
+                <ResourceDictionary Source="Styles/PlatformStyles.xaml"/>
                 
                 <!-- Application DataTemplate imports -->
                 <ResourceDictionary Source="Views/DataTemplates/NewsViews.xaml"/>
