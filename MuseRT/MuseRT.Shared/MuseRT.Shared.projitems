@@ -22,12 +22,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\ViewModelBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Html2Xaml\Html2Xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Html2Xaml\RichTextBlockProperties.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\VariableSizedGrid.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\TextPlainConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\NavigationServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GalleryViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TourViewModel.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\GalleryDataSource.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Data\TourDataSource.xml" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Data\NewsDataSource.xml" />
     <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />

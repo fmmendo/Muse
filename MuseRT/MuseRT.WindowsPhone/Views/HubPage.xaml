@@ -22,8 +22,13 @@
                   d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:NewsViewModel, IsDesignTimeCreatable=true}"
                   ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
             <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="tour" DataContext="{Binding MainViewModel.TourModel}" 
-                  d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
+                  d:DataContext="{d:DesignData Source=/Assets/Data/TourDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
                   ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+            <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="gallery" DataContext="{Binding MainViewModel.GalleryModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/GalleryDataSource.xml, Type=vm:GalleryViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource GalleryList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+            
+            <!--<HubSection x:Name="GallerySection"-->
         </Hub>
     </Grid>
 

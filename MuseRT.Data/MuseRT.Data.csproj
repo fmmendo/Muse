@@ -53,6 +53,7 @@
     <Compile Include="DataSchemas\RssSchema.cs" />
     <Compile Include="DataSources\DataSourceBase.cs" />
     <Compile Include="DataSources\DataSourceContent.cs" />
+    <Compile Include="DataSources\GalleryDataSource.cs" />
     <Compile Include="DataSources\NewsDataSource.cs" />
     <Compile Include="DataSources\TourDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

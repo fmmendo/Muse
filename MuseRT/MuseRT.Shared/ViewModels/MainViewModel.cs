@@ -32,10 +32,17 @@ namespace MuseRT.ViewModels
             get { return _tourModel ?? (_tourModel = new TourViewModel()); }
         }
 
+        private GalleryViewModel _galleryModel;
+        public GalleryViewModel GalleryModel
+        {
+            get { return _galleryModel ?? (_galleryModel = new GalleryViewModel()); }
+        }
+
         public void SetViewType(ViewTypes viewType)
         {
             NewsModel.ViewType = viewType;
             TourModel.ViewType = viewType;
+            GalleryModel.ViewType = viewType;
         }
         public ViewModelBase SelectedItem
         {
@@ -75,7 +82,8 @@ namespace MuseRT.ViewModels
             var loadTasks = new Task[]
             { 
                 NewsModel.LoadItemsAsync(forceRefresh),
-                TourModel.LoadItemsAsync(forceRefresh)
+                TourModel.LoadItemsAsync(forceRefresh),
+                GalleryModel.LoadItemsAsync(forceRefresh)
             };
             await Task.WhenAll(loadTasks);
         }

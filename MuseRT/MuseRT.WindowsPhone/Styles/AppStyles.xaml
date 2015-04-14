@@ -32,9 +32,9 @@
     
     <!-- Hub Header -->
     <DataTemplate x:Key="HubHeader">
-        <Grid>
+        <!--<Grid>-->
             <TextBlock Text="{Binding}" Style="{StaticResource SubHeaderText}" />
-        </Grid>
+        <!--</Grid>-->
     </DataTemplate>
     
     <!-- Html2Xaml  -->
