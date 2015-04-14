@@ -87,6 +87,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Views\GalleryDetailPage.xaml.cs">
+      <DependentUpon>GalleryDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\HubPage.xaml.cs">
       <DependentUpon>HubPage.xaml</DependentUpon>
     </Compile>
@@ -134,6 +137,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\GalleryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\HubPage.xaml">
       <Generator>MSBuild:Compile</Generator>
