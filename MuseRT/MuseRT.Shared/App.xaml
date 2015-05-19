@@ -12,6 +12,7 @@
                 
                 <!-- Application DataTemplate imports -->
                 <ResourceDictionary Source="Views/DataTemplates/NewsViews.xaml"/>
+                <ResourceDictionary Source="Views/DataTemplates/TourViews.xaml"/>
                 <ResourceDictionary Source="Views/DataTemplates/GalleryViews.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 

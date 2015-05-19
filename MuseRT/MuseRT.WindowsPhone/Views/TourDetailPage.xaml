@@ -23,7 +23,7 @@
                   DataContext="{Binding TourModel}"
                   d:DataContext="{d:DesignData Source=/Assets/Data/TourDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
                   ItemsSource="{Binding Items}"
-                  ItemTemplate="{StaticResource News1DetailDetail}"
+                  ItemTemplate="{StaticResource Tour1DetailDetail}"
                   SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
                   ItemContainerStyle="{StaticResource FlipItemStyle}">
         </FlipView>

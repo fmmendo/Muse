@@ -64,6 +64,14 @@
         <Setter Property="TextTrimming" Value="WordEllipsis" />
     </Style>
 
+    <Style x:Key="ItemSubheaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
+        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="SemiLight"/>
+        <Setter Property="LineHeight" Value="20"/>
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
     <Style x:Key="ItemHeaderWrapText" TargetType="TextBlock" BasedOn="{StaticResource ItemHeaderText}">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
         <Setter Property="LineHeight" Value="22"/>
@@ -79,14 +87,6 @@
         <Setter Property="TextTrimming" Value="WordEllipsis" />
         <Setter Property="MaxHeight" Value="110"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
-    </Style>
-
-    <Style x:Key="ItemSubheaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
-        <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
-        <Setter Property="FontSize" Value="15"/>
-        <Setter Property="FontWeight" Value="SemiLight"/>
-        <Setter Property="LineHeight" Value="20"/>
-        <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
     
 </ResourceDictionary>

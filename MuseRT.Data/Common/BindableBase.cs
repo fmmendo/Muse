@@ -42,7 +42,7 @@ namespace MuseRT.Data
         /// <param name="value">The value of the property.</param> 
         /// <param name="propertyName">The name of the property.</param> 
         /// <returns>A boolean indicating the success of the assignation.</returns> 
-        protected bool SetProperty<T>(ref T storage, T value, string propertyName = null)
+        protected bool SetProperty<T>(ref T storage, T value, [CallerMemberName] string propertyName = null)
         {
             if (Equals(storage, value))
                 return false;
