@@ -4,6 +4,8 @@ using MuseRT.Data.Common;
 using MuseRT.Data.DataSources;
 using MuseRT.Services;
 using System;
+using System.Linq;
+using System.Collections.ObjectModel;
 using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -137,6 +139,22 @@ namespace MuseRT.ViewModels
         override protected void NavigateToSelectedItem()
         {
             NavigationServices.NavigateToPage("TourDetailPage");
+        }
+
+        public override async System.Threading.Tasks.Task LoadItemsAsync(bool forceRefresh = false)
+        {
+            ProgressBarVisibility = Visibility.Visible;
+
+            var data = new ObservableCollection<RssSchema>();
+            var timeStamp = await DataSource.LoadDataAsync(data, forceRefresh);
+
+            _items = new ObservableCollection<RssSchema>(from i in data orderby i.TourDate select i);
+
+            OnPropertyChanged("Items");
+            OnPropertyChanged("PreviewItems");
+            OnPropertyChanged("HasMoreItems");
+
+            ProgressBarVisibility = Visibility.Collapsed;
         }
     }
 }

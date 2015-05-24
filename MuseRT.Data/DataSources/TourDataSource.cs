@@ -25,7 +25,10 @@ namespace MuseRT.Data.DataSources
             try
             {
                 var rssDataProvider = new RssDataProvider(_url);
-                return await rssDataProvider.Load();
+                var items = await rssDataProvider.Load();
+                var touritems = await rssDataProvider.GetTourDate(items);
+                var orderedTourItems = touritems.OrderBy(i => i.TourDate);
+                return touritems.OrderBy(i => i.TourDate);
             }
             catch (Exception ex)
             {

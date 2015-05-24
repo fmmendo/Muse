@@ -160,5 +160,25 @@ namespace MuseRT.Data
 
             return items;
         }
+
+        public async Task<ObservableCollection<RssSchema>> GetTourDate(ObservableCollection<RssSchema> items)
+        {
+            foreach (var item in items)
+            {
+                int start = -1;
+                int end = -1;
+
+                start = item.Content.IndexOf("<b>On:</b>");
+                end = item.Content.IndexOf("<br />");
+
+                if (start >= 0 && end > 0 && end > start)
+                {
+                    string strDate = item.Content.Substring(start + 10, end - (start + 10)).Trim();
+                    item.TourDate = DateTime.Parse(strDate);
+                }
+            }
+
+            return items;
+        }
     }
 }

@@ -17,6 +17,8 @@ namespace MuseRT.Data
         private string _author;
         private DateTime _publishDate;
 
+        private DateTime _tourDate;
+
         public string Id { get; set; }
 
         public string Title
@@ -91,6 +93,21 @@ namespace MuseRT.Data
         public override string DefaultContent
         {
             get { return Content; }
+        }
+
+        public DateTime TourDate
+        {
+            get { return _tourDate; }
+            set
+            {
+                SetProperty(ref _tourDate, value);
+                OnPropertyChanged("MonthYear");
+            }
+        }
+
+        public string MonthYear
+        {
+            get { return TourDate.ToString("MMM yyyy"); }
         }
 
         override public string GetValue(string fieldName)
