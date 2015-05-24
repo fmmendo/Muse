@@ -16,9 +16,9 @@
         </Grid.ChildrenTransitions>
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
+            <!--<RowDefinition Height="Auto"/>-->
             <RowDefinition Height="*"/>
-            <RowDefinition Height="80"/>
+            <!--<RowDefinition Height="80"/>-->
         </Grid.RowDefinitions>
 
         <FlipView x:Name="Flip" Grid.Row="1" AutomationProperties.AutomationId="ItemsFlipView" AutomationProperties.Name="Item Details" TabIndex="1"

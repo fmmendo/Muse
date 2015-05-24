@@ -178,7 +178,7 @@ namespace MuseRT
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            await SuspensionManager.SaveAsync();
+            //await SuspensionManager.SaveAsync();
             deferral.Complete();
         }
     }

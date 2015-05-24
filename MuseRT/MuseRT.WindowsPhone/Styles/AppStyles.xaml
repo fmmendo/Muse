@@ -5,6 +5,7 @@
     
     <!-- Colors -->
     <SolidColorBrush x:Key="AppForegroundColor" Color="#ffffff" />
+    <SolidColorBrush x:Key="AppSubtleColor" Color="#c1c1c1" />
     <SolidColorBrush x:Key="AppBackgroundColor" Color="#000000" />
     
     <!-- Images -->
@@ -33,13 +34,14 @@
     <!-- Hub Header -->
     <DataTemplate x:Key="HubHeader">
         <!--<Grid>-->
-            <TextBlock Text="{Binding}" Style="{StaticResource SubHeaderText}" />
+            <TextBlock Text="{Binding}" Style="{StaticResource HubHeaderText}" />
         <!--</Grid>-->
     </DataTemplate>
     
     <!-- Html2Xaml  -->
     <Style x:Key="Html2XamlStyle" TargetType="RichTextBlock">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
+        <Setter Property="LineHeight" Value="28"/>
         <Setter Property="FontSize"  Value="19" />
     </Style>
     
@@ -66,7 +68,7 @@
 
     <Style x:Key="ItemSubheaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="16"/>
         <Setter Property="FontWeight" Value="SemiLight"/>
         <Setter Property="LineHeight" Value="20"/>
         <Setter Property="TextWrapping" Value="Wrap" />
@@ -74,11 +76,12 @@
 
     <Style x:Key="ItemHeaderWrapText" TargetType="TextBlock" BasedOn="{StaticResource ItemHeaderText}">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
-        <Setter Property="LineHeight" Value="22"/>
+        <Setter Property="FontSize" Value="24"/>
+        <Setter Property="LineHeight" Value="28"/>
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
-    <Style x:Key="SubHeaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
+    <Style x:Key="HubHeaderText" TargetType="TextBlock" BasedOn="{StaticResource BaseItemText}">
         <Setter Property="Foreground" Value="{StaticResource AppForegroundColor}" />
         <Setter Property="FontSize" Value="28"/>
         <Setter Property="LineHeight" Value="32"/>

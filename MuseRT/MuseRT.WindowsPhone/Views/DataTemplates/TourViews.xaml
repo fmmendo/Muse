@@ -47,25 +47,15 @@
 							   FontWeight="Black"></TextBlock>
                     </Border>
                     <Border Height="24" Width="80" Background="{StaticResource PhoneAccentBrush}">
-
-
-                        <TextBlock Text="{Binding MonthYear}" 
-							   Foreground="Black" 
-                                   FontSize="16"
-							   Height="24" 
-							   Width="80" 
-							   TextAlignment="Center" 
-							   FontWeight="Black"></TextBlock>
+                        <TextBlock Text="{Binding MonthYear}" TextAlignment="Center"
+							   Foreground="Black" FontWeight="Black"
+                               FontSize="16" Height="24" Width="80" />
                     </Border>
                 </StackPanel>
             </Grid>
-            <!--<StackPanel Width="311" Orientation="Vertical">-->
-                <!-- Gig title -->
-                <TextBlock Text="{Binding Title}" MaxWidth="235" Margin="10,0,10,15"
-											   TextWrapping="Wrap" 
-                                               Style="{StaticResource ItemHeaderText}"
-                                               Foreground="White"/>
-            <!--</StackPanel>-->
+            <TextBlock Text="{Binding Title}" MaxWidth="235" Margin="10,0,10,15"
+					   TextWrapping="Wrap" Style="{StaticResource ItemHeaderText}"
+                       Foreground="White"/>
         </StackPanel>
     </DataTemplate>
 
@@ -122,8 +112,8 @@
                 <TextBlock Grid.Row="0" Text="{Binding Title, Converter={StaticResource TextPlainConverter}, ConverterParameter = 140}"
                        Style="{StaticResource ItemHeaderWrapText}" TextWrapping="Wrap"/>
                 <ScrollViewer Grid.Row="2" Margin="0,12,0,24" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                    <RichTextBlock Style="{StaticResource Html2XamlStyle}" html2xaml:Properties.Html="{Binding Content}" html2xaml:Properties.ContainsCrlf="False"
-                               TextWrapping="Wrap"/>
+                    <RichTextBlock Style="{StaticResource Html2XamlStyle}" html2xaml:Properties.Html="{Binding Content}"
+                                   html2xaml:Properties.ContainsCrlf="False" TextWrapping="Wrap" Margin="0,12,0,0"/>
                 </ScrollViewer>
             </Grid>
         </Grid>
