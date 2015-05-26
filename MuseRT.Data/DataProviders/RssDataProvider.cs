@@ -180,5 +180,74 @@ namespace MuseRT.Data
 
             return items;
         }
+
+        public async Task<ObservableCollection<RssSchema>> GetDescription(ObservableCollection<RssSchema> items)
+        {
+
+            foreach (var item in items)
+            {
+
+                var desc = item.Content;
+
+                // remove the ImageURL from the description
+                if (String.IsNullOrEmpty(item.ImageUrl))
+                {
+                    int startImage = -1;
+                    int endImage = -1;
+                    int endtag = -1;
+
+                    startImage = desc.IndexOf("<img src=\"", 0);
+                    if (startImage >= 0)
+                    {
+                        startImage += 10;
+                        endImage = desc.IndexOf("\" ", startImage);
+                        if (endImage >= startImage)
+                        {
+                            endtag = desc.IndexOf(">", endImage);
+                            if (endtag >= endImage)
+                            {
+                                var url = desc.Substring(startImage, endImage - startImage);
+                                if (url.Contains("thumb"))
+                                {
+                                    item.ExtraImageUrl = url;
+                                    item.ImageUrl = url.Replace("thumb", "original");
+                                }
+                                else if (url.Contains("square"))
+                                {
+                                    item.ExtraImageUrl = url.Replace("square", "thumb");
+                                    item.ImageUrl = url.Replace("square", "original");
+                                }
+                                else
+                                {
+                                    item.ExtraImageUrl = url.Replace("original", "thumb");
+                                    item.ImageUrl = url;
+                                }
+                                //_imageURL = desc.Substring(startImage, endImage - startImage);
+                                //ImageThumb = _imageURL;
+                                //NotifyPropertyChanged("ImageThumb");
+                                //NotifyPropertyChanged("ImageURL");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    if (item.ImageUrl.Contains("thumb"))
+                    {
+                        item.ExtraImageUrl = item.ImageUrl;
+                        item.ImageUrl = item.ImageUrl.Replace("thumb", "original");
+                    }
+                    else if (item.ImageUrl.Contains("square"))
+                    {
+                        item.ExtraImageUrl = item.ImageUrl.Replace("square", "thumb");
+                        item.ImageUrl = item.ImageUrl.Replace("square", "original");
+                    }
+                }
+
+                item.Content = desc;
+            }
+
+            return items;
+        }
     }
 }

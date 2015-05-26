@@ -25,7 +25,11 @@
     <!-- ListPhotoTile Item -->
     <DataTemplate x:Key="GalleryItem">
         <Grid Margin="5">
-            <Image Source="{Binding ImageUrl}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Image Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image.Source>
+                    <BitmapImage UriSource="{Binding ImageUrl}" DecodePixelType="Logical" DecodePixelHeight="160"/>
+                </Image.Source>
+            </Image>
         </Grid>
     </DataTemplate>
 
@@ -33,11 +37,9 @@
     <DataTemplate x:Key="Gallery1DetailDetail">
         <ScrollViewer ZoomMode="Disabled">
             <StackPanel Margin="12,0">
-                <TextBlock Margin="0,16" Text="{Binding Title}" Style="{StaticResource ItemHeaderWrapText}" TextWrapping="Wrap"/>
-                <!--<TextBlock Style="{StaticResource TitleStyle}" Text="{Binding Title}" LineStackingStrategy="MaxHeight"/>-->
-                <RichTextBlock Margin="0,12" html2xaml:Properties.Html="{Binding Content}" html2xaml:Properties.ContainsCrlf="False"
-                               Style="{StaticResource Html2XamlStyle}" 
-                               TextWrapping="Wrap"/>
+                <Image Source="{Binding ImageUrl}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <TextBlock Margin="0,16" Text="{Binding Title}" FontStyle="Italic" Style="{StaticResource ItemHeaderWrapText}" TextWrapping="Wrap"/>
             </StackPanel>
         </ScrollViewer>
     </DataTemplate>
