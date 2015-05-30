@@ -9,7 +9,6 @@ namespace MuseRT.Data
     public abstract class DataSourceBase<T> where T : BindableSchemaBase
     {
         private const int ContentExpirationHours = 2;
-
         protected abstract string CacheKey { get; }
 
         public abstract Task<IEnumerable<T>> LoadDataAsync();

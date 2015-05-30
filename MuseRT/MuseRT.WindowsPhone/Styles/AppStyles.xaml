@@ -16,6 +16,9 @@
     <SolidColorBrush x:Key="AppBackground" Color="#000000" />
     <!--<SolidColorBrush x:Key="AppBackgroundPopup" Color="#000000" Opacity=".50"/>-->
 
+    <!-- AppBar Background -->
+    <SolidColorBrush x:Key="AppBarBackground" Color="#000000" />
+
     <!-- Page Header -->
     <DataTemplate x:Key="PageHeaderMargin">
         <!-- Back button and page title -->

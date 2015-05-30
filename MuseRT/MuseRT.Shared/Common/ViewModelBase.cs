@@ -253,7 +253,7 @@ namespace MuseRT.Common
             if (currentItem != null)
             {
                 //fmmd
-                //await SpeechServices.StartTextToSpeech(currentItem.GetValues(propertyNames));
+                await SpeechServices.StartTextToSpeech(currentItem.GetValues(propertyNames));
             }
         }
 

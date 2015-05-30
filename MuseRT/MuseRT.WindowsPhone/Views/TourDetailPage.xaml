@@ -24,10 +24,33 @@
                   d:DataContext="{d:DesignData Source=/Assets/Data/TourDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
                   ItemsSource="{Binding Items}"
                   ItemTemplate="{StaticResource Tour1DetailDetail}"
-                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
-                  
-                  >
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
         </FlipView>
-
     </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding NewsModel.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
+            <AppBarButton DataContext="{Binding NewsModel}" Label="text to speech" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
+                    Command="{Binding TextToSpeechCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton DataContext="{Binding NewsModel}" Label="refresh" x:Uid="RefreshButton" Visibility="{Binding RefreshVisibility}"
+                    Command="{Binding RefreshCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/Refresh.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton DataContext="{Binding NewsModel}" Label="go to source" x:Uid="GoToSourceButton" Visibility="{Binding GoToSourceVisibility}"
+                    Command="{Binding GoToSourceCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/GoToSource.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="ShareItemButton" Label="share item" DataContext="{Binding NewsModel}" Visibility="{Binding ShareItemVisibility}" Command="{Binding ShareItemCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

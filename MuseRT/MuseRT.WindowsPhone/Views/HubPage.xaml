@@ -29,5 +29,25 @@
                   ContentTemplate="{StaticResource GalleryList}" IsHeaderInteractive="{Binding HasMoreItems}" />
         </Hub>
     </Grid>
-
+    <Page.BottomAppBar>
+        <CommandBar Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
+            <AppBarButton x:Uid="TextToSpeechButton" Label="text to speech" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
+                    Command="{Binding MainViewModel.SelectedItem.TextToSpeechCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="RefreshButton" Label="refresh" Visibility="{Binding MainViewModel.SelectedItem.RefreshVisibility}"
+                    Command="{Binding MainViewModel.SelectedItem.RefreshCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/Refresh.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
+                <!--<AppBarButton x:Uid="PrivacyButton" Label="privacy" Command="{Binding MainViewModel.PrivacyCommand}"/>-->
+                <AppBarButton x:Uid="ShareItemButton" Label="share item" Visibility="{Binding MainViewModel.SelectedItem.ShareItemVisibility}" Command="{Binding MainViewModel.SelectedItem.ShareItemCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

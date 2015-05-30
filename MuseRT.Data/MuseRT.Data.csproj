@@ -57,6 +57,7 @@
     <Compile Include="DataSources\NewsDataSource.cs" />
     <Compile Include="DataSources\TourDataSource.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\SpeechServices.cs" />
     <Compile Include="Storage\Cache.cs" />
     <Compile Include="Storage\Logger.cs" />
     <Compile Include="Storage\UserStorage.cs" />
