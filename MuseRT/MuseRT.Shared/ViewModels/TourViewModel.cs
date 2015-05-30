@@ -32,6 +32,26 @@ namespace MuseRT.ViewModels
             }
         }
 
+        private RelayCommandEx<RssSchema> addToCalendarCommand;
+        public RelayCommandEx<RssSchema> AddToCalendarCommand
+        {
+            get
+            {
+                if (addToCalendarCommand == null)
+                {
+                    addToCalendarCommand = new RelayCommandEx<RssSchema>(
+                        (item) =>
+                        {
+                            var currentItem = GetCurrentItem();
+                            if (currentItem != null)
+                                CalendarService.AddToCalendarAsync(currentItem.Title, currentItem.TourDate);
+                        });
+                }
+
+                return addToCalendarCommand;
+            }
+        }
+
         private RelayCommandEx<string> changeFontSizeCommand;
         public RelayCommandEx<string> ChangeFontSizeCommand
         {

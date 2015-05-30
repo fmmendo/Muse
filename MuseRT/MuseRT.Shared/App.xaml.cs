@@ -1,18 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using MuseRT.Common;
@@ -23,6 +13,9 @@ using Windows.UI.ApplicationSettings;
 #if WINDOWS_PHONE_APP
 using Windows.Phone.UI.Input;
 using MuseRT.Views;
+using Windows.ApplicationModel.Appointments;
+using Windows.Storage;
+using System.Collections.Generic;
 #endif
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -39,6 +32,7 @@ namespace MuseRT
         private TransitionCollection transitions;
 #endif
 
+        
         /// <summary>
         /// Initializes the singleton instance of the <see cref="App"/> class. This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -180,6 +174,81 @@ namespace MuseRT
             var deferral = e.SuspendingOperation.GetDeferral();
             //await SuspensionManager.SaveAsync();
             deferral.Complete();
+        }
+
+        private AppointmentStore appointmentStore = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public AppointmentStore AppointmentStore
+        {
+            get
+            {
+                if (appointmentStore == null)
+                {
+                    var t = AppointmentManager.RequestStoreAsync(AppointmentStoreAccessType.AppCalendarsReadWrite).AsTask();
+                    //t.Start();
+                    t.Wait();
+                    appointmentStore = t.Result;
+
+                    if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
+                    {
+
+                        appointmentStore.ChangeTracker.Enable();
+                        appointmentStore.ChangeTracker.Reset();
+
+                        ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
+                    }
+
+                }
+
+                return appointmentStore;
+            }
+            //set { appointmentStore = value; }
+        }
+
+        public AppointmentCalendar currentAppCalendar = null;
+        /// <summary>
+        /// 
+        /// </summary>
+        public AppointmentCalendar CurrentAppCalendar
+        {
+            get
+            {
+                if (currentAppCalendar == null)
+                {
+                    IReadOnlyList<AppointmentCalendar> appCalendars = AppointmentStore.FindAppointmentCalendarsAsync(FindAppointmentCalendarsOptions.IncludeHidden).AsTask().Result;
+
+                    //AppointmentCalendar appCalendar = null;
+
+
+                    // Apps can create multiple calendars. This example creates only one.
+                    if (appCalendars.Count == 0)
+                    {
+                        currentAppCalendar = AppointmentStore.CreateAppointmentCalendarAsync("Muse Tour Calendar").AsTask().Result;
+
+                    }
+                    else
+                    {
+                        currentAppCalendar = appCalendars[0];
+                    }
+
+
+                    currentAppCalendar.OtherAppReadAccess = AppointmentCalendarOtherAppReadAccess.Full;
+                    currentAppCalendar.OtherAppWriteAccess = AppointmentCalendarOtherAppWriteAccess.SystemOnly;
+
+                    // This app will show the details for the appointment. Use System to let the system show the details.
+                    currentAppCalendar.SummaryCardView = AppointmentSummaryCardView.App;
+
+                    var save = currentAppCalendar.SaveAsync().AsTask();
+                    //save.Start();
+                    save.Wait();
+
+                    //currentAppCalendar = appCalendar;
+                }
+
+                return currentAppCalendar;
+            }
         }
     }
 }

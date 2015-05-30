@@ -97,12 +97,6 @@
     <Compile Include="Views\NewsDetailPage.xaml.cs">
       <DependentUpon>NewsDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SectionPage.xaml.cs">
-      <DependentUpon>SectionPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ItemPage.xaml.cs">
-      <DependentUpon>ItemPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\TourDetailPage.xaml.cs">
       <DependentUpon>TourDetailPage.xaml</DependentUpon>
     </Compile>
@@ -113,6 +107,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\AppBar\appbar.calendar.png" />
     <Content Include="Assets\AppBar\GoToSource.png" />
     <Content Include="Assets\AppBar\PinToStart.png" />
     <Content Include="Assets\AppBar\Refresh.png" />
@@ -156,14 +151,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\NewsDetailPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\SectionPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

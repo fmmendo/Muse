@@ -31,7 +31,7 @@
     </Grid>
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding NewsModel.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
-            <AppBarButton DataContext="{Binding NewsModel}" Label="text to speech" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
+            <AppBarButton DataContext="{Binding NewsModel}" Label="TTS" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
                     Command="{Binding TextToSpeechCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>

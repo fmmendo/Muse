@@ -29,9 +29,10 @@
                   ContentTemplate="{StaticResource GalleryList}" IsHeaderInteractive="{Binding HasMoreItems}" />
         </Hub>
     </Grid>
+    
     <Page.BottomAppBar>
         <CommandBar Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
-            <AppBarButton x:Uid="TextToSpeechButton" Label="text to speech" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
+            <AppBarButton x:Uid="TextToSpeechButton" Label="TTS" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
                     Command="{Binding MainViewModel.SelectedItem.TextToSpeechCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
