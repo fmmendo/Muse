@@ -81,6 +81,10 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\..\MuseBackgroundTask\MuseBackgroundTask.csproj">
+      <Project>{95fe0fce-9710-44c7-8ce3-efaf76c33806}</Project>
+      <Name>MuseBackgroundTask</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\MuseRT.Data\MuseRT.Data.csproj">
       <Project>{27746738-54dc-4867-adf3-ff7d85a7aba9}</Project>
       <Name>MuseRT.Data</Name>

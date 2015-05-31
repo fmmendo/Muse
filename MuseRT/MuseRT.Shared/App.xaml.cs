@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -6,16 +7,20 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using MuseRT.Common;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Background;
+using System.Diagnostics;
 
 #if WINDOWS_APP
-using Windows.UI.ApplicationSettings;
+    using Windows.UI.ApplicationSettings;
 #endif
 #if WINDOWS_PHONE_APP
-using Windows.Phone.UI.Input;
-using MuseRT.Views;
-using Windows.ApplicationModel.Appointments;
-using Windows.Storage;
-using System.Collections.Generic;
+    using Windows.Phone.UI.Input;
+    using MuseRT.Views;
+    using Windows.ApplicationModel.Appointments;
+    using Windows.Storage;
+    using System.Collections.Generic;
+    using MuseBackgroundTask;
 #endif
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
@@ -44,6 +49,7 @@ namespace MuseRT
 
 #if WINDOWS_PHONE_APP
             HardwareButtons.BackPressed += OnBackPressed;
+            RegisterBackgroundTask();
 #endif
         }
 
@@ -248,6 +254,36 @@ namespace MuseRT
                 }
 
                 return currentAppCalendar;
+            }
+        }
+
+
+        private async Task RegisterBackgroundTask()
+        {
+            try
+            {
+                BackgroundAccessStatus status = await BackgroundExecutionManager.RequestAccessAsync();
+                if (status == BackgroundAccessStatus.AllowedWithAlwaysOnRealTimeConnectivity || status == BackgroundAccessStatus.AllowedMayUseActiveRealTimeConnectivity)
+                {
+                    bool isRegistered = BackgroundTaskRegistration.AllTasks.Any(x => x.Value.Name == typeof(NewItemsNotifierBackgroundTask).FullName);
+                    if (!isRegistered)
+                    {
+                        BackgroundTaskBuilder builder = new BackgroundTaskBuilder
+                        {
+                            Name = typeof(NewItemsNotifierBackgroundTask).FullName,
+                            TaskEntryPoint = typeof(NewItemsNotifierBackgroundTask).FullName
+                        };
+
+                        builder.SetTrigger(new TimeTrigger(1440, false));//every 24h
+                        //builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+
+                        BackgroundTaskRegistration task = builder.Register();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("The access has already been granted");
             }
         }
     }
