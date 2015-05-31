@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muse", "Muse\Muse.csproj", "{FA671DB9-642F-4FE1-ADFB-889AC89D3A22}"
 EndProject
@@ -21,10 +21,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseRT.WindowsPhone", "Muse
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MuseRT.Data", "MuseRT.Data\MuseRT.Data.csproj", "{27746738-54DC-4867-ADF3-FF7D85A7ABA9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Muse.Universal", "Muse.Universal\Muse.Universal.csproj", "{2256005D-E94C-4F74-A4B1-21F379573C6D}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		MuseRT\MuseRT.Shared\MuseRT.Shared.projitems*{ca80f39e-7364-4264-bab4-2bb912159593}*SharedItemsImports = 4
-		MuseRT\MuseRT.Shared\MuseRT.Shared.projitems*{c3c9be1c-35ac-4d64-9ed7-caba5c7b4320}*SharedItemsImports = 4
 		MuseRT\MuseRT.Shared\MuseRT.Shared.projitems*{ee5c1394-f7a1-4df3-9bec-69f84d29f7ef}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -148,6 +149,26 @@ Global
 		{27746738-54DC-4867-ADF3-FF7D85A7ABA9}.Release|ARM.ActiveCfg = Release|Any CPU
 		{27746738-54DC-4867-ADF3-FF7D85A7ABA9}.Release|x64.ActiveCfg = Release|Any CPU
 		{27746738-54DC-4867-ADF3-FF7D85A7ABA9}.Release|x86.ActiveCfg = Release|Any CPU
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|ARM.Build.0 = Debug|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x64.ActiveCfg = Debug|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x64.Build.0 = Debug|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x64.Deploy.0 = Debug|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x86.ActiveCfg = Debug|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x86.Build.0 = Debug|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Debug|x86.Deploy.0 = Debug|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|Any CPU.ActiveCfg = Release|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|ARM.ActiveCfg = Release|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|ARM.Build.0 = Release|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|ARM.Deploy.0 = Release|ARM
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x64.ActiveCfg = Release|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x64.Build.0 = Release|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x64.Deploy.0 = Release|x64
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x86.ActiveCfg = Release|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x86.Build.0 = Release|x86
+		{2256005D-E94C-4F74-A4B1-21F379573C6D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
