@@ -12,23 +12,22 @@
                       ScrollViewer.VerticalScrollBarVisibility="Hidden"
                       ItemTemplate="{StaticResource NewsItem}">
             </ListView>
-            <ProgressBar Width="340" Height="30" Foreground="White" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
+            <ProgressBar Width="340" Height="40" Foreground="White" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
         </Grid>
     </DataTemplate>
 
 
     <!-- ListVerticalCards Item -->
     <DataTemplate x:Key="NewsItem">
-
-        <StackPanel Orientation="Horizontal">
-            <Image Grid.Row="0" Margin="10" MaxHeight="80"
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
+            <Image Grid.Row="0" MaxHeight="80"
                     Stretch="UniformToFill" VerticalAlignment="Top">
                 <Image.Source>
                     <BitmapImage UriSource="{Binding ImageUrl}" DecodePixelType="Logical" DecodePixelHeight="80"/>
                 </Image.Source>
             </Image>
             <StackPanel>
-                <TextBlock Text="{Binding Title}" MaxLines="2" MaxWidth="235" Margin="10, 10, 10, 4" Style="{StaticResource ItemHeaderText}"/>
+                <TextBlock Text="{Binding Title}" MaxLines="2" MaxWidth="235" Margin="10, 0, 10, 4" Style="{StaticResource ItemHeaderText}"/>
                 <TextBlock Text="{Binding Summary}" MaxLines="2" MaxWidth="235" Margin="10, 4" Style="{StaticResource ItemSubheaderText}" VerticalAlignment="Top"/>
             </StackPanel>
         </StackPanel>

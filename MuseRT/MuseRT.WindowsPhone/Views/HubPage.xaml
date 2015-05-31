@@ -6,7 +6,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:vm="using:MuseRT.ViewModels"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    DataContext="{Binding DefaultViewModel, RelativeSource={RelativeSource Self}}"
     d:DataContext="{Binding Source={d:DesignData Source=../MuseRT.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
     xmlns:data="using:MuseRT.Data"
     mc:Ignorable="d">
@@ -17,7 +16,14 @@
                 <EntranceThemeTransition/>
             </TransitionCollection>
         </Grid.ChildrenTransitions>
-        <Hub x:Name="Container" Grid.Row="1" Background="{StaticResource AppBackground}" DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeaderMargin}" SectionsInViewChanged="OnSectionsInViewChanged">
+        <Hub x:Name="Container" Grid.Row="1" DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeaderMargin}" SectionsInViewChanged="OnSectionsInViewChanged">
+            <Hub.Background>
+                <ImageBrush Stretch="UniformToFill">
+                    <ImageBrush.ImageSource>
+                        <BitmapImage x:Name="HubBG" DecodePixelHeight="800" UriSource="ms-appx:///Assets/Background.png"/>
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
+            </Hub.Background>
             <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="news" DataContext="{Binding MainViewModel.NewsModel}" 
                   d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:NewsViewModel, IsDesignTimeCreatable=true}"
                   ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
@@ -32,7 +38,7 @@
     
     <Page.BottomAppBar>
         <CommandBar Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
-            <AppBarButton x:Uid="TextToSpeechButton" Label="TTS" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
+            <AppBarButton x:Uid="TextToSpeechButton" Label="listen" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
                     Command="{Binding MainViewModel.SelectedItem.TextToSpeechCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>

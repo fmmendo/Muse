@@ -31,8 +31,7 @@
 
     <!-- ListVerticalCards Calendar-like Item -->
     <DataTemplate x:Key="TourItem">
-        <StackPanel Orientation="Horizontal" 
-										Margin="0,0,0,17">
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
             <Grid VerticalAlignment="Top">
                 <!-- Draw a calendar-like icon with tour date -->
                 <StackPanel Orientation="Vertical">

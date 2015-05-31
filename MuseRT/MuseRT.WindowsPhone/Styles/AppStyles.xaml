@@ -22,16 +22,21 @@
     <!-- Page Header -->
     <DataTemplate x:Key="PageHeaderMargin">
         <!-- Back button and page title -->
-        <Grid Margin="0,24,0,0">
-            <Grid.ColumnDefinitions>
+        <!--<Grid Margin="0,24,0,0">-->
+            <!--<Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
                 <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Image Margin="0" Source="{StaticResource AppLogoImage}" Width="70" Height="70" VerticalAlignment="Center" />
+            </Grid.ColumnDefinitions>-->
+            <Image Stretch="UniformToFill" Height="60" Margin="0,36,0,0">
+                <Image.Source>
+                    <BitmapImage DecodePixelHeight="60" DecodePixelType="Logical" UriSource="ms-appx:///Assets/MUSE logo.png" />
+                </Image.Source>
+            </Image>
+            <!--<Image Margin="0" Source="{StaticResource AppLogoImage}" Width="70" Height="70" VerticalAlignment="Center" />
             <TextBlock Grid.Column="1" Margin="10,0" VerticalAlignment="Center" IsHitTestVisible="false" 
                        Text="{StaticResource AppTitle}" FontSize="48" TextWrapping="NoWrap"
-                       Foreground="{StaticResource AppForegroundColor}"/>
-        </Grid>
+                       Foreground="{StaticResource AppForegroundColor}"/>-->
+        <!--</Grid>-->
     </DataTemplate>
     
     <!-- Hub Header -->

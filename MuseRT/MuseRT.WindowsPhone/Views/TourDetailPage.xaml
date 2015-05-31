@@ -30,7 +30,7 @@
 
     <Page.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding TourModel.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
-            <AppBarButton DataContext="{Binding TourModel}" Label="TTS" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
+            <AppBarButton DataContext="{Binding TourModel}" Label="listen" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
                     Command="{Binding TextToSpeechCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
