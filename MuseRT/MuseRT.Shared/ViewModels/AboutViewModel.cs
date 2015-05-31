@@ -11,7 +11,7 @@ namespace MuseRT.ViewModels
         {
             get
             {
-                return "fmendo";
+                return "fmmendo";
             }
         }
 
@@ -27,7 +27,7 @@ namespace MuseRT.ViewModels
         {
             get
             {
-                return "Keep up with everything MUSE!";
+                return "Keep up-to-date on anything Muse! This App displays the most recent news, forthcoming gigs, and photos. Feel free to suggest more features via the feedback email or in the review comments";
             }
         }
     }
