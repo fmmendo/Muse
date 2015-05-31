@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="MuseRT.Views.HubPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MuseRT"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:vm="using:MuseRT.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DataContext="{Binding Source={d:DesignData Source=../MuseRT.Shared/DataModel/SampleData.json, Type=data:SampleDataSource}}"
+    xmlns:data="using:MuseRT.Data"
+    mc:Ignorable="d">
+
+    <Grid x:Name="LayoutRoot">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+        <Hub x:Name="Container" Grid.Row="1" DataContext="{Binding}" HeaderTemplate="{StaticResource PageHeaderMargin}" SectionsInViewChanged="OnSectionsInViewChanged">
+            <Hub.Background>
+                <ImageBrush Stretch="UniformToFill">
+                    <ImageBrush.ImageSource>
+                        <BitmapImage x:Name="HubBG" DecodePixelHeight="800" UriSource="ms-appx:///Assets/Background.png"/>
+                    </ImageBrush.ImageSource>
+                </ImageBrush>
+            </Hub.Background>
+            <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="news" DataContext="{Binding MainViewModel.NewsModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/NewsDataSource.xml, Type=vm:NewsViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource NewsList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+            <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="tour" DataContext="{Binding MainViewModel.TourModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/TourDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource TourList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+            <HubSection HeaderTemplate="{StaticResource HubHeader}" Width="360" Header="gallery" DataContext="{Binding MainViewModel.GalleryModel}" 
+                  d:DataContext="{d:DesignData Source=/Assets/Data/GalleryDataSource.xml, Type=vm:GalleryViewModel, IsDesignTimeCreatable=true}"
+                  ContentTemplate="{StaticResource GalleryList}" IsHeaderInteractive="{Binding HasMoreItems}" />
+        </Hub>
+    </Grid>
+    
+    <Page.BottomAppBar>
+        <CommandBar Visibility="{Binding MainViewModel.AppBarVisibility}" ClosedDisplayMode="Minimal" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
+            <AppBarButton x:Uid="TextToSpeechButton" Label="listen" Visibility="{Binding MainViewModel.SelectedItem.TextToSpeechVisibility}"
+                    Command="{Binding MainViewModel.SelectedItem.TextToSpeechCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton x:Uid="RefreshButton" Label="refresh" Visibility="{Binding MainViewModel.SelectedItem.RefreshVisibility}"
+                    Command="{Binding MainViewModel.SelectedItem.RefreshCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/Refresh.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="AboutButton" Label="about" Command="{Binding MainViewModel.AboutCommand}"/>
+                <!--<AppBarButton x:Uid="PrivacyButton" Label="privacy" Command="{Binding MainViewModel.PrivacyCommand}"/>-->
+                <AppBarButton x:Uid="ShareItemButton" Label="share item" Visibility="{Binding MainViewModel.SelectedItem.ShareItemVisibility}" Command="{Binding MainViewModel.SelectedItem.ShareItemCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>

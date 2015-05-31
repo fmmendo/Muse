@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>ee5c1394-f7a1-4df3-9bec-69f84d29f7ef</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>MuseRT</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\DelegateCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\FontSizes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ItemClickCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommandEx.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ViewModelBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Html2Xaml\Html2Xaml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Html2Xaml\RichTextBlockProperties.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\VariableSizedGrid.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\TextPlainConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModel\SampleDataSource.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\CalendarService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Services\NavigationServices.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AboutViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\GalleryViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewsViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\TourViewModel.cs" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\GalleryDataSource.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\TourDataSource.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Data\NewsDataSource.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)DataModel\SampleData.json" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
+  </ItemGroup>
+</Project>

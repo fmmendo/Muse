@@ -1,0 +1,46 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:MuseRT.Controls"
+    xmlns:html2xaml="using:MuseRT.Controls.Html2Xaml"
+    xmlns:common="using:MuseRT.Common"
+    xmlns:local="using:MuseRT.Views.DataTemplates">
+    
+    <!-- ListPhotoTile -->
+    <DataTemplate x:Key="GalleryList">
+        <Grid>
+            <controls:VariableSizedGrid ItemsSource="{Binding Items}"  SelectionMode="None" IsSwipeEnabled="False" IsItemClickEnabled="True"
+                                        common:ItemClickCommand.Command="{Binding ItemClickCommand}"
+                                        ItemTemplate="{StaticResource GalleryItem}"
+                                        ItemsPanel="{StaticResource GalleryItemsPanel}" />
+            <ProgressBar Height="40" VerticalAlignment="Top" IsIndeterminate="True" Visibility="{Binding ProgressBarVisibility}" />
+        </Grid>
+    </DataTemplate>
+
+    <!-- ListPhotoTile ItemsPanel-->
+    <ItemsPanelTemplate x:Key="GalleryItemsPanel">
+        <VariableSizedWrapGrid ItemHeight="80" ItemWidth="80" Orientation="Horizontal" />
+    </ItemsPanelTemplate>
+
+    <!-- ListPhotoTile Item -->
+    <DataTemplate x:Key="GalleryItem">
+        <Grid Margin="5">
+            <Image Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <Image.Source>
+                    <BitmapImage UriSource="{Binding ImageUrl}" DecodePixelType="Logical" DecodePixelHeight="160"/>
+                </Image.Source>
+            </Image>
+        </Grid>
+    </DataTemplate>
+
+    <!--Detail page-->
+    <DataTemplate x:Key="Gallery1DetailDetail">
+        <ScrollViewer ZoomMode="Disabled">
+            <StackPanel Margin="12,0">
+                <Image Source="{Binding ImageUrl}" Stretch="UniformToFill" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                <TextBlock Margin="0,16" Text="{Binding Title}" FontStyle="Italic" Style="{StaticResource ItemHeaderWrapText}" TextWrapping="Wrap"/>
+            </StackPanel>
+        </ScrollViewer>
+    </DataTemplate>
+</ResourceDictionary>

@@ -69,68 +69,6 @@ namespace Muse.WP81
             }
         }
 
-        protected async override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            //appointmentStore = await AppointmentManager.RequestStoreAsync(AppointmentStoreAccessType.AppCalendarsReadWrite);
-
-            //if (!ApplicationData.Current.LocalSettings.Values.ContainsKey("FirstRun"))
-            //{
-
-            //    await CheckForAndCreateAppointmentCalendars();
-            //    //await SyncAppointmentsFromAppServer();
-
-            //    appointmentStore.ChangeTracker.Enable();
-            //    appointmentStore.ChangeTracker.Reset();
-
-            //    ApplicationData.Current.LocalSettings.Values["FirstRun"] = false;
-            //}
-        }
-
-        //async public Task CreateNewAppointment()
-        //{
-        //    Appointment newAppointment = new Appointment();
-
-        //    newAppointment.Subject = "test";
-        //    newAppointment.StartTime = DateTime.Now.AddDays(5);
-        //    newAppointment.Duration = TimeSpan.FromHours(2);
-        //    newAppointment.Location = "here!";
-        //    newAppointment.RoamingId = "984756";
-
-        //    //save appointment to calendar
-        //    await currentAppCalendar.SaveAppointmentAsync(newAppointment);
-        //}
-
-        //async public Task CheckForAndCreateAppointmentCalendars()
-        //{
-
-        //    IReadOnlyList<AppointmentCalendar> appCalendars = await appointmentStore.FindAppointmentCalendarsAsync(FindAppointmentCalendarsOptions.IncludeHidden);
-
-        //    AppointmentCalendar appCalendar = null;
-
-
-        //    // Apps can create multiple calendars. This example creates only one.
-        //    if (appCalendars.Count == 0)
-        //    {
-        //        appCalendar = await appointmentStore.CreateAppointmentCalendarAsync("Example App Calendar");
-
-        //    }
-        //    else
-        //    {
-        //        appCalendar = appCalendars[0];
-        //    }
-
-
-        //    appCalendar.OtherAppReadAccess = AppointmentCalendarOtherAppReadAccess.Full;
-        //    appCalendar.OtherAppWriteAccess = AppointmentCalendarOtherAppWriteAccess.SystemOnly;
-
-        //    // This app will show the details for the appointment. Use System to let the system show the details.
-        //    appCalendar.SummaryCardView = AppointmentSummaryCardView.App;
-
-        //    await appCalendar.SaveAsync();
-
-        //    currentAppCalendar = appCalendar;
-        //}
-
 
         /// <summary>
         /// Navigates to about page.
@@ -176,13 +114,11 @@ namespace Muse.WP81
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
             RegisterBackgroundTask();
         }
 
         private void ApplicationBarMenuItem_Click(object sender, EventArgs e)
         {
-
             NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
         }
     }

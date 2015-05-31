@@ -1,0 +1,26 @@
+﻿<Application
+    x:Class="MuseRT.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:converters="using:MuseRT.Converters"
+    xmlns:local="using:MuseRT">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/AppStyles.xaml"/>
+                <ResourceDictionary Source="Styles/PlatformStyles.xaml"/>
+                
+                <!-- Application DataTemplate imports -->
+                <ResourceDictionary Source="Views/DataTemplates/NewsViews.xaml"/>
+                <ResourceDictionary Source="Views/DataTemplates/TourViews.xaml"/>
+                <ResourceDictionary Source="Views/DataTemplates/GalleryViews.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <x:String x:Key="AppName">muse</x:String>
+            <x:String x:Key="AppTitle">muse</x:String>
+            
+            <!-- Converters -->
+            <converters:TextPlainConverter x:Key="TextPlainConverter"/>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

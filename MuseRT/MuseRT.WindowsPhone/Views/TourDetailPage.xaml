@@ -1,0 +1,62 @@
+﻿<Page
+    x:Class="MuseRT.Views.TourDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:MuseRT.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="{StaticResource AppBackground}">
+        <Grid.ChildrenTransitions>
+            <TransitionCollection>
+                <EntranceThemeTransition/>
+            </TransitionCollection>
+        </Grid.ChildrenTransitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <FlipView x:Name="Flip" Grid.Row="0" Margin="0,24,0,0" AutomationProperties.AutomationId="ItemsFlipView" AutomationProperties.Name="Item Details" TabIndex="1"
+                  DataContext="{Binding TourModel}"
+                  d:DataContext="{d:DesignData Source=/Assets/Data/TourDataSource.xml, Type=vm:TourViewModel, IsDesignTimeCreatable=true}"
+                  ItemsSource="{Binding Items}"
+                  ItemTemplate="{StaticResource Tour1DetailDetail}"
+                  SelectedItem="{Binding SelectedItem, Mode=TwoWay}">
+        </FlipView>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal" Visibility="{Binding TourModel.AppBarVisibility}" Background="{StaticResource AppBarBackground}" Foreground="{StaticResource AppForegroundColor}">
+            <AppBarButton DataContext="{Binding TourModel}" Label="listen" x:Uid="TextToSpeechButton" Visibility="{Binding TextToSpeechVisibility}"
+                    Command="{Binding TextToSpeechCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/TextToSpeech.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton DataContext="{Binding TourModel}" Label="refresh" x:Uid="RefreshButton" Visibility="{Binding RefreshVisibility}"
+                    Command="{Binding RefreshCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/Refresh.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton DataContext="{Binding TourModel}" Label="save" x:Uid="AddToCalendarButton" Visibility="Visible"
+                    Command="{Binding AddToCalendarCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/appbar.calendar.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <AppBarButton DataContext="{Binding TourModel}" Label="go to source" x:Uid="GoToSourceButton" Visibility="{Binding GoToSourceVisibility}"
+                    Command="{Binding GoToSourceCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="ms-appx:///Assets/AppBar/GoToSource.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Uid="ShareItemButton" Label="share item" DataContext="{Binding TourModel}" Visibility="{Binding ShareItemVisibility}" Command="{Binding ShareItemCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
