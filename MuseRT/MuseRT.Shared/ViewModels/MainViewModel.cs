@@ -108,7 +108,7 @@ namespace MuseRT.ViewModels
             {
                 return new DelegateCommand(() =>
                 {
-                    NavigationServices.NavigateToPage("AboutThisAppPage");
+                    NavigationServices.NavigateToPage("AboutPage");
                 });
             }
         }
