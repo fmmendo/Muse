@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="2472fmmendo.Muse.muApp" Publisher="CN=C87E6CA5-4279-4D64-99CC-FA01F995C667" Version="1.5.0.0" />
-  <mp:PhoneIdentity PhoneProductId="8995bdf8-edd3-4bd3-a26f-3202554c4c52" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="2472fmmendo.Muse.muApp" Publisher="CN=C87E6CA5-4279-4D64-99CC-FA01F995C667" Version="1.5.0.7" />
+  <mp:PhoneIdentity PhoneProductId="69008ac7-309e-4925-8c5b-9443df7cd687" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Muse.muApp</DisplayName>
+    <DisplayName>Muse.mu</DisplayName>
     <PublisherDisplayName>fmmendo</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>

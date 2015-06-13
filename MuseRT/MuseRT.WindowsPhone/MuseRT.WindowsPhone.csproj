@@ -144,7 +144,6 @@
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="Assets\HubBackground.theme-dark.png" />
     <Content Include="Assets\HubBackground.theme-light.png" />
-    <None Include="Package.StoreAssociation.xml" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\PlatformStyles.xaml">

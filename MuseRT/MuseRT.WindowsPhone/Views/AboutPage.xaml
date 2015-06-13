@@ -8,7 +8,7 @@
     xmlns:vm="using:MuseRT.ViewModels"    
     xmlns:html2xaml="using:MuseRT.Controls.Html2Xaml"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="Black">
 
     <Grid>
         <Grid.RowDefinitions>
