@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<VoiceCommands xmlns="http://schemas.microsoft.com/voicecommands/1.1">
+  <CommandSet xml:lang="en-us" Name="MuseCommandSet_en-us">
+    <CommandPrefix> Muse, </CommandPrefix>
+    <Example> Show me upcoming gigs</Example>
+
+    <Command Name="showTripToDestination">
+      <Example> show upcoming gigs </Example>
+      <ListenFor> show upcoming gigs </ListenFor>
+      <Feedback> show upcoming gigs </Feedback>
+      <Navigate/>
+    </Command>
+      <Subject>City/State</Subject>
+    </PhraseTopic>-->
+  </CommandSet>
+
+  <!-- Other CommandSets for other languages -->
+
+
+    <!--<PhraseList Label="destination">
+      <Item> London </Item>
+      <Item> Dallas </Item>
+      <Item> New York </Item>
+    </PhraseList>-->
+
+    <!--<PhraseTopic Label="newDestination" Scenario="Search">
+</VoiceCommands>

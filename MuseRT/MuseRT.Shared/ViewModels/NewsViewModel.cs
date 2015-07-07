@@ -82,7 +82,7 @@ namespace MuseRT.ViewModels
 
         override protected async void TextToSpeech()
         {
-            await base.SpeakText("ID");
+            await base.SpeakText("content");
         }
 
         override public Visibility PinToStartVisibility

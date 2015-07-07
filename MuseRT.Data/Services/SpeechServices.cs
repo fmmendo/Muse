@@ -7,6 +7,7 @@ using Windows.Media.SpeechSynthesis;
 using Windows.UI.Xaml.Controls;
 
 using MuseRT.Data;
+using System.Text.RegularExpressions;
 
 namespace MuseRT.Services
 {
@@ -34,7 +35,7 @@ namespace MuseRT.Services
                         _speech = new SpeechSynthesizer();
                         _speech.Voice = voice;
 
-                        SpeechSynthesisStream speechStream = await _speech.SynthesizeTextToStreamAsync(System.Net.WebUtility.HtmlDecode(text));
+                        SpeechSynthesisStream speechStream = await _speech.SynthesizeTextToStreamAsync(StripHTML(System.Net.WebUtility.HtmlDecode(text)));
                         _soundPlayer = new MediaElement();
                         _soundPlayer.SetSource(speechStream, speechStream.ContentType);
                         _soundPlayer.Play();
@@ -45,6 +46,12 @@ namespace MuseRT.Services
                     Logger.WriteError("SpeechServices", ex);
                 }
             }
+        }
+
+        public static string StripHTML(string htmlString)
+        {
+            string pattern = @"<(.|\n)*?>";
+            return Regex.Replace(htmlString, pattern, string.Empty);
         }
 
         static public void StopTextToSpeech()
