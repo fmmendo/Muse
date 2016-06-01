@@ -10,9 +10,10 @@ using MuseRT.Common;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using System.Diagnostics;
+using Windows.ApplicationModel.Appointments;
 
 #if WINDOWS_APP
-    using Windows.UI.ApplicationSettings;
+using Windows.UI.ApplicationSettings;
 #endif
 #if WINDOWS_PHONE_APP
     using Windows.Phone.UI.Input;
